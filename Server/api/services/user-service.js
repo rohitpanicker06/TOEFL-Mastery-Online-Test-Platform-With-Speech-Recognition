@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const userService = {
     // function to resgister new user
     async AddUser(userObj, response) {
-        const saltRounds = await bcrypt.genSalt();
+        const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(userObj.password, saltRounds);
         userObj.password = hashedPassword;
         userModel.create(userObj, (err, data) => {
@@ -18,53 +18,48 @@ const userService = {
         })
     },
 
-//     // function to login new user
-//     async login(userObj, response) {
-    
-//         userModel.findOne(userObj, (err, data) => {
-//             if (err) {
-//                 console.log(err);
-//                 console.log("Mayur");
-//                 response.json({ Status: "Failed F", msg: err});
-//             } else {
-//                 // if the Login ID and Password doesn't match
-//                 console.log("outside data");
-//                 console.log(data);
-//                 if (data) {
-//                     console.log("inside data");
-//                     bcrypt.compareSync(userObj.password.toString(), data.password.toString(), (err, result) => {
-//                         if (result) {
-//                             jwt.sign({ data }, 'secretkey', { expiresIn: '1h' }, (err, token) => {
-//                             response.json({ Status: "Success", msg: "welcome " + data.username, token: token });
-//                             });
-//                 }else {
-//                     console.log("err data");
-//                     response.json({ Status: "Failed S", msg: "Invalid username or password" });
-//                 }
-//             });
-//             }
-//         }
-//     })
-
-// },
-
-login(userObj, response) {
-    
-    userModel.findOne(userObj, (err, data) => {
-        if (err) {
-            response.json({ Status: "Failed", msg: err});
-        } else {
-             // if the Login ID and Password doesn't match
-             if (data) {
-                jwt.sign({ data }, 'secretkey', { expiresIn: '1h' }, (err, token) => {
-                    response.json({ Status: "Success", msg: "welcome " + data.username, token: token });
+//function to login new user
+async login(userObj, response) {
+        userModel.findOne({email:userObj.email}, (err, data) => {
+            if (err) {
+                response.json({ Status: "Failed", msg: err});
+            } else {
+                // if the Login ID and Password doesn't match
+                if (data) {
+                    bcrypt.compare(userObj.password, data.password, (err, result) => {
+                        if (result) {
+                            jwt.sign({ data }, 'secretkey', { expiresIn: '1h' }, (err, token) => {
+                            response.json({ Status: "Success", msg: "welcome " + data.email, token: token });
+                            });
+                        }else {
+                            response.json({ Status: "Failed", msg: "Invalid username or password" });
+                        }
                 });
-            }else {
-                response.json({ Status: "Failed", msg: "Invalid username or password" });
             }
         }
     })
+
 },
+
+// login(userObj, response) {
+//         console.log("uu:",userObj);
+//         userModel.findOne({email:userObj.email}, (err, data) => {
+//         console.log("data:",data);
+//         console.log("err:",err);
+//         if (err) {
+//             response.json({ Status: "Failed", msg: err});
+//         } else {
+//              // if the Login ID and Password doesn't match
+//              if (data) {
+//                 jwt.sign({ data }, 'secretkey', { expiresIn: '1h' }, (err, token) => {
+//                     response.json({ Status: "Success", msg: "welcome " + data.email, token: token });
+//                 });
+//             }else {
+//                 response.json({ Status: "Failed", msg: "Invalid username or password" });
+//             }
+//         }
+//     })
+// },
    
 }
 
