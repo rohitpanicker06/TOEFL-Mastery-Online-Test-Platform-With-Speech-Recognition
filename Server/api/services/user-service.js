@@ -2,6 +2,7 @@ const userModel = require('../models/user-model');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
+
 const userService = {
     // function to resgister new user
     async AddUser(userObj, response) {
@@ -38,6 +39,25 @@ async login(userObj, response) {
             }
         }
     })
+
+},
+
+async send(userObj, response) {
+    console.log("Hello");
+    var MongoClient = require('mongodb').MongoClient;
+    var url = "mongodb://localhost:27017/";
+    
+    MongoClient.connect(url, function(err, db) {
+      if (err) throw err;
+      var dbo = db.db("quizitdb");
+      dbo.collection("Team Members").findOne({}, function(err, result) {
+        if (err) throw err;
+        
+        var jsonArray = result.teamAuthors;
+        response.json(jsonArray);
+        db.close();
+      });
+    });
 
 },
 

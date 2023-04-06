@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('../controllers/user-controller');
 const emailController = require('../controllers/emailController');
+const memberController = require('../controllers/memberController')
 
 const router = express.Router();
 
@@ -15,5 +16,9 @@ router.route('/login')
 // email verification 
 router.route('/email')
 .post(emailController.send);
+
+router.route('/getTeamMembers')
+.post(memberController.send);
+
 
 module.exports = router;
