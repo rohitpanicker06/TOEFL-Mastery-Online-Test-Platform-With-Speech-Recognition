@@ -1,17 +1,14 @@
 import { useState } from "react";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Topbar from "./Pages/global/Topbar";
-import Sidebar from "./Pages/global/Sidebar";
-import Dashboard from "./Pages/dashboard";
-import Team from "./Pages/Team";
-import Login from "./Pages/login";
-import Contacts from "./Pages/contacts";
-import FAQ from "./Pages/faq";
+import Topbar from "./Components/Navigation/Topbar";
+import Sidebar from "./Components/Navigation/Sidebar";
+import ContactUs from "./Pages/ContactUs/ContactUs";
+import FAQ from "./Pages/FAQ/FAQ";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
-
-
+import StudentDashboard from "./Pages/Student/StudentDashboard";
+import TeamMembers from "./Pages/Team/TeamMembers";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -26,25 +23,21 @@ function App() {
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
-              {<Route path="/" element={<Dashboard />}/>}
-              {<Route path="/team" element={<Team />} />}
-              {<Route path="/contacts" element={<Contacts />} />}
-              {<Route path="/faq" element={<FAQ />} />}
-              {<Route path="/login" element={<Login />} />}
-              {/* <Route path="/" element={<Dashboard />} />
-              <Route path="/invoices" element={<Invoices />} />
-              <Route path="/pie" element={<Pie />} />
-              <Route path="/line" element={<Line />} />
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/geography" element={<Geography />} /> */}
+              {
+                <Route
+                  path="/student/dashboard"
+                  element={<StudentDashboard />}
+                />
+              }
+              {<Route path="/student/team-members" element={<TeamMembers />} />}
+              {<Route path="/student/contact-us" element={<ContactUs />} />}
+              {<Route path="/student/faq" element={<FAQ />} />}
             </Routes>
           </main>
         </div>
       </ThemeProvider>
     </ColorModeContext.Provider>
-  )
-  
+  );
 }
 
-  
 export default App;

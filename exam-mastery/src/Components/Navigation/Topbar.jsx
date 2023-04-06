@@ -9,16 +9,13 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 
 const Topbar = () => {
   const theme = useTheme();
-//   const colors = tokens(theme.palette.mode);
+  //   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
 
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
-      {/* SEARCH BAR */}
-      <Box>
-        
-      </Box>
-
+      <h1> TOEFL MASTERY </h1>
+      <Box></Box>
       {/* ICONS */}
       <Box display="flex">
         <IconButton onClick={colorMode.toggleColorMode}>

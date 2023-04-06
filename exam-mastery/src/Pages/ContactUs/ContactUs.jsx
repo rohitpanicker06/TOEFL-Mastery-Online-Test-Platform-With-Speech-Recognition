@@ -2,9 +2,9 @@ import { Box, Button, TextField } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Header from "../../Components/Header";
+import Header from "../../Components/Header/Header";
 
-const Form = () => {
+const ContactUs = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const handleFormSubmit = (values) => {
@@ -13,7 +13,10 @@ const Form = () => {
 
   return (
     <Box m="20px">
-      <Header title="CONTACT US" subtitle="Contact us to get more information" />
+      <Header
+        title="CONTACT US"
+        subtitle="Contact us to get more information"
+      />
 
       <Formik
         onSubmit={handleFormSubmit}
@@ -138,4 +141,4 @@ const initialValues = {
   address2: "",
 };
 
-export default Form;
+export default ContactUs;
