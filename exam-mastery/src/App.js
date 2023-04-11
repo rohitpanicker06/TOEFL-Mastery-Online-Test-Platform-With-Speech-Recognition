@@ -9,6 +9,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import StudentDashboard from "./Pages/Student/StudentDashboard";
 import TeamMembers from "./Pages/Team/TeamMembers";
+import PracticeTestDashBoard from "./Pages/PracticeTests/PracticeTestDashBoard";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -27,6 +28,12 @@ function App() {
                 <Route
                   path="/student/dashboard"
                   element={<StudentDashboard />}
+                />
+              }
+              {
+                <Route
+                  path="/student/practice-tests"
+                  element={<PracticeTestDashBoard />}
                 />
               }
               {<Route path="/student/team-members" element={<TeamMembers />} />}

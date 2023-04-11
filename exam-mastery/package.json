@@ -21,6 +21,8 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "aod": "^1.0.6",
+    "aos": "^2.3.4",
     "apexcharts": "^3.37.3",
     "formik": "^2.2.9",
     "prop-types": "^15.8.1",
