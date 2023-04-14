@@ -3,16 +3,17 @@ const nodemailer = require('nodemailer')
 
 
 exports.send = (req, res) => {
+
     var otp = generateOTP();
     const obj = req.body
     console.log(obj);
-    console.log('send mail');
+   
 
 let transporter = nodemailer.createTransport({
     service:"gmail",
     auth:{
         user:"rohit.panicker16@vit.edu",
-        pass:"welcometopune18"
+        pass:"*********"
     },
     tls:{
         rejectUnauthorized: false,
@@ -21,11 +22,11 @@ let transporter = nodemailer.createTransport({
 
 transporter.sendMail({
     from:"rohit.panicker16@vit.edu",
-    to:"rohitpanicker06@gmail.com",
+    to: obj.email,
     subject:"OTP: Verification Code",
-    text:"Hi..."+"This email"+otp+"   "+obj.query
+    text:"Welcome "+ obj.email+ " Your OTP is : "+otp+"   "
 });
-res.json({msg:"successfully",
+res.json({msg:"OTP Sent Successfully",
 "otp":otp});
 }
 
