@@ -1,6 +1,9 @@
 const nodemailer = require('nodemailer')
 
+
+
 exports.send = (req, res) => {
+    var otp = generateOTP();
     const obj = req.body
     console.log(obj);
     console.log('send mail');
@@ -8,8 +11,8 @@ exports.send = (req, res) => {
 let transporter = nodemailer.createTransport({
     service:"gmail",
     auth:{
-        user:"rohitpanicke06@gmail.com",
-        pass:"Welcometopune18@"
+        user:"rohit.panicker16@vit.edu",
+        pass:"welcometopune18"
     },
     tls:{
         rejectUnauthorized: false,
@@ -17,10 +20,15 @@ let transporter = nodemailer.createTransport({
 })
 
 transporter.sendMail({
-    from:"rohitpanicke06@gmail.com",
-    to:"panicker.r@northeastern.edu",
-    subject:"Test",
-    text:"Hi..."+"This email"+obj.username+"   "+obj.query
+    from:"rohit.panicker16@vit.edu",
+    to:"rohitpanicker06@gmail.com",
+    subject:"OTP: Verification Code",
+    text:"Hi..."+"This email"+otp+"   "+obj.query
 });
-res.json({msg:"successfully"});
+res.json({msg:"successfully",
+"otp":otp});
+}
+
+function generateOTP(){
+    return Math.random().toString().substr(2, 6);
 }
