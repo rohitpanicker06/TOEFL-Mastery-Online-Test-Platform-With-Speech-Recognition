@@ -18,7 +18,7 @@ router.route('/email')
 .post(emailController.send);
 
 router.route('/getTeamMembers')
-.post(memberController.send);
+.get(memberController.send);
 
 
 module.exports = router;
