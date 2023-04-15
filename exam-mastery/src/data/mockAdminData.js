@@ -1,0 +1,23 @@
+export const mockDataTeam = [
+    {
+      id: 1,
+      title: "Exam 1",
+      type: "General",
+      date: "Thu, 1 December 2022",
+    },
+    {
+        id: 2,
+        title: "Exam 2",
+        type: "Academic",
+        date: "Sat, 3 December 2022",
+    },
+    {
+        id: 3,
+        title: "Exam 3",
+        type: "General",
+        date: "Fri, 6 December 2022",
+    },
+  ];
+  
+  
+  
