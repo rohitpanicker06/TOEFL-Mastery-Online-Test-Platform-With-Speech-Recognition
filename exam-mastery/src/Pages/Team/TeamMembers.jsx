@@ -5,9 +5,18 @@ import { mockDataTeam } from "../../data/mockData";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import Header from "../../Components/Header/Header";
+import { useEffect, useState } from "react";
 
+var members = null;
 const TeamMembers = () => {
   const theme = useTheme();
+  const [members, setMembers] = useState([]);
+
+  useEffect(() => {
+    getTeamMembers().then((data) => {
+      setMembers(data);
+    });
+  }, []);
   const colors = tokens(theme.palette.mode);
   const columns = [
     { field: "id", headerName: "ID" },
@@ -98,10 +107,30 @@ const TeamMembers = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataTeam} columns={columns} />
+        <DataGrid checkboxSelection rows={members} columns={columns} />
       </Box>
     </Box>
   );
 };
+
+function getTeamMembers() {
+  return new Promise((resolve, reject) => {
+    const data = "";
+    const xhr = new XMLHttpRequest();
+
+    xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        console.log(this.responseText);
+        resolve(JSON.parse(this.responseText));
+      }
+    });
+
+    xhr.open("GET", "http://localhost:3000/getTeamMembers/");
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.send(data);
+  });
+}
+
 
 export default TeamMembers;

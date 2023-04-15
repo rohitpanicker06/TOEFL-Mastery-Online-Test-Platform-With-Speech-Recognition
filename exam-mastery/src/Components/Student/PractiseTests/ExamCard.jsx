@@ -41,7 +41,7 @@ const ExamCard = ({ exam }) => {
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             {/* {formatDate(new Date(exam.date))} */}
-            11th March 2023
+            {exam.exam_date}
           </Typography>
           <Typography variant="h3" component="div">
             <Box
@@ -51,8 +51,7 @@ const ExamCard = ({ exam }) => {
                 justifyContent: "space-between",
               }}
             >
-              {/* <div>{exam.title}</div> */}
-              <div>Exam 1</div>
+              <div>{exam.exam_title}</div>
             </Box>
           </Typography>
           <Divider />
