@@ -2,6 +2,7 @@ const express = require('express');
 const userController = require('../controllers/user-controller');
 const emailController = require('../controllers/emailController');
 const memberController = require('../controllers/memberController')
+const examController = require('../controllers/examController')
 
 const router = express.Router();
 
@@ -20,5 +21,7 @@ router.route('/email')
 router.route('/getTeamMembers')
 .get(memberController.send);
 
+router.route('/getAllexams')
+.get(examController.send);
 
 module.exports = router;

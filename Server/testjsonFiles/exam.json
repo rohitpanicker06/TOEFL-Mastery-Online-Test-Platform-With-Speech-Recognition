@@ -1,0 +1,31 @@
+[ {
+    "exam_date" : "10/20/2020",
+    "exam_id" : "01",
+    "exam_title" : "Aptitude Test 1", 
+    "test_id": "001"
+},
+{
+    "exam_date" : "10/20/2021",
+    "exam_id" : "02",
+    "exam_title" : "Aptitude Test 2", 
+    "test_id": "002"
+},
+{
+    "exam_date" : "11/18/2021",
+    "exam_id" : "03",
+    "exam_title" : "Aptitude Test 3", 
+    "test_id": "003"
+},
+{
+    "exam_date" : "12/20/2021",
+    "exam_id" : "04",
+    "exam_title" : "Aptitude Test 4", 
+    "test_id": "004"
+},
+{
+    "exam_date" : "07/07/2023",
+    "exam_id" : "05",
+    "exam_title" : "Aptitude Test 5", 
+    "test_id": "005"
+}
+]
