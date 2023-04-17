@@ -30,7 +30,7 @@ const options = {
   useFindAndModify: false
 }
 // the post listing on
-app.listen(3000|| 1234,(err)=>{
+app.listen(9000|| 1234,(err)=>{
     if(err){
         console.log("Error in server Starting ",err);
     }else{

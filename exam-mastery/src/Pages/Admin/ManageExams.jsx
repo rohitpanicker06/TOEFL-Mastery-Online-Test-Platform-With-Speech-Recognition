@@ -1,13 +1,23 @@
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { mockDataTeam } from "../../data/mockAdminData";
+import { mockAdminData } from "../../data/mockAdminData";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import Header from "../../Components/Header/Header";
+import { useEffect, useState } from "react";
 
-const TeamMembers = () => {
+var exams = null;
+const ManageExams = () => {
   const theme = useTheme();
+  const [exams, setExams] = useState([]);
+
+  useEffect(() => {
+    getExams().then((data) => {
+      console.log("dd:",data);
+      setExams(data);
+    });
+  }, []);
   const colors = tokens(theme.palette.mode);
   const columns = [
     { field: "id", headerName: "ID" },
@@ -80,10 +90,30 @@ const TeamMembers = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataTeam} columns={columns} />
+        <p>{exams.id}{exams.title}</p>
+        <DataGrid checkboxSelection rows={exams} columns={columns} />
       </Box>
     </Box>
   );
 };
 
-export default TeamMembers;
+function getExams() {
+  return new Promise((resolve, reject) => {
+    const data = "";
+    const xhr = new XMLHttpRequest();
+
+    xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        //console.log("errrr:",this);
+        resolve(JSON.parse(this.responseText));
+      }
+    });
+
+    xhr.open("GET", "http://localhost:9000/getExams");
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.send(data);
+  });
+}
+
+export default ManageExams;
