@@ -1,6 +1,9 @@
 const express = require('express');
 const userController = require('../controllers/user-controller');
 const emailController = require('../controllers/emailController');
+const memberController = require('../controllers/memberController')
+const examController = require('../controllers/examController')
+const adminController = require('../controllers/adminController')
 
 const router = express.Router();
 
@@ -15,5 +18,14 @@ router.route('/login')
 // email verification 
 router.route('/email')
 .post(emailController.send);
+
+router.route('/getTeamMembers')
+.get(memberController.send);
+
+router.route('/getAllexams')
+.get(examController.send);
+
+router.route('/getExams')
+.get(adminController.send);
 
 module.exports = router;

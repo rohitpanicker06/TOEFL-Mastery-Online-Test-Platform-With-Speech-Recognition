@@ -8,9 +8,12 @@ const app = express();
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 // Only allow requests from our client
-app.use(cors({
-    origin: 'http://localhost:3000'
-  }))
+const corsOptions ={
+  origin:'http://localhost:3001', 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 
 app.use(require('./api/utils/cors'));
 app.use("/",userRoute);
@@ -27,7 +30,7 @@ const options = {
   useFindAndModify: false
 }
 // the post listing on
-app.listen(process.env.PORT || 1234,(err)=>{
+app.listen(9000|| 1234,(err)=>{
     if(err){
         console.log("Error in server Starting ",err);
     }else{

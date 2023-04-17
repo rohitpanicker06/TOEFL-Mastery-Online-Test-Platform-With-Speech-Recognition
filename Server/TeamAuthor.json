@@ -1,0 +1,44 @@
+{
+    "teamAuthors":[
+        {
+            "name": "Rohit Panicker",
+            "id": 1,
+            "age": 24,
+            "email": "panicker.r@northeastern.edu",
+            "phoneNumber": "+18573135629",
+            "position": "Co-Founder"
+        },
+        {
+            "name": "Shweta Bhulchandani",
+            "id": 2,
+            "age": 24,
+            "email": "shweta.b@northeastern.edu",
+            "phoneNumber": "+18976567829",
+            "position": "Co-Founder"
+        },
+        {
+            "name": "Mayur Khandetod",
+            "id": 3,
+            "age": 28,
+            "email": "mayur.r@northeastern.edu",
+            "phoneNumber": "+19878675678",
+            "position": "Co-Founder"
+        },
+        {
+            "name": "Jatinder Bali",
+            "id": 4,
+            "age": 27,
+            "email": "jatin.b@northeastern.edu",
+            "phoneNumber": "+7867567829",
+            "position": "Co-Founder"
+        },
+        {
+            "name": "Rutuja Mandlik",
+            "id": 5,
+            "age": 27,
+            "email": "rutuja.m@northeastern.edu",
+            "phoneNumber": "+18767567829",
+            "position": "Co-Founder"
+        }
+    ]
+}
