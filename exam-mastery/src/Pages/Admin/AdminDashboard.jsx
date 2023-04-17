@@ -2,14 +2,14 @@ import React from "react";
 import { Box, Typography, Container, Grid, Link } from "@mui/material";
 import Summary from "../../Components/Student/Summary";
 import { useEffect, useState } from "react";
-import SectionWiseComparisonChart from "./SectionWiseComparisonChart";
+import SectionWiseComparisonChart from "../Student/SectionWiseComparisonChart";
 import SomeComponent from "../../Components/Student/SomeComponent";
 import Leaderboard from "../../Components/Student/Leaderboard";
 import Iconify from "../../Components/Iconify/Iconify";
 import SuggestedStudyMaterial from "../../Components/Student/SuggestedStudyMaterial";
 import Avatar from "@mui/material/Avatar";
 
-const StudentDashboard = () => {
+const AdminDashboard = () => {
   const [userData, setUserData] = useState({});
   const [summary, setSummary] = useState({
   });
@@ -202,4 +202,4 @@ const StudentDashboard = () => {
   );
 };
 
-export default StudentDashboard;
+export default AdminDashboard;

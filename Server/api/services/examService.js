@@ -8,7 +8,7 @@ const examService = {
     async send(userObj, response) {
        
         var MongoClient = require('mongodb').MongoClient;
-        var url = "mongodb://localhost:27017/";
+        var url = "mongodb://0.0.0.0:27017/";
         
         MongoClient.connect(url, function(err, db) {
           if (err) throw err;
@@ -84,7 +84,7 @@ async function getTestAllTests()
 
     console.log('inside test');
     const MongoClient = require('mongodb').MongoClient;
-    const url = "mongodb://localhost:27017/";
+    const url = "mongodb://0.0.0.0:27017/";
     let returnResult = undefined;
     
     
@@ -118,7 +118,7 @@ async function getAllQuestionTests()
 
    
     const MongoClient = require('mongodb').MongoClient;
-    const url = "mongodb://localhost:27017/";
+    const url = "mongodb://0.0.0.0:27017/";
     let returnResult = undefined;
     
     
