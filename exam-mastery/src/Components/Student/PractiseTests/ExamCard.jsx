@@ -9,8 +9,6 @@ import {
   AvatarGroup,
   Avatar,
 } from "@mui/material";
-import CardMedia from "@mui/material/CardMedia";
-import { Button, CardActions } from "@mui/material";
 import { purple, cyan, teal, deepOrange } from "@mui/material/colors";
 import formatDate from "../../../utils/formatDate";
 import ReadingIcon from "@mui/icons-material/AutoStories";
@@ -18,8 +16,6 @@ import ListeningIcon from "@mui/icons-material/Hearing";
 import WritingIcon from "@mui/icons-material/Description";
 import SpeakingIcon from "@mui/icons-material/RecordVoiceOver";
 import { useTheme } from "@emotion/react";
-
-// import Link from "next/link";
 import { Link as RouterLink } from "react-router-dom";
 
 function getComponent(category) {
@@ -33,17 +29,23 @@ function getComponent(category) {
     return <SpeakingIcon sx={{ fontSize: 20, color: deepOrange[500] }} />;
 }
 
-const ExamCard = ({ exam }) => {
+const TestCard = ({ exam }) => {
   const theme = useTheme();
   return (
-    <Card sx={{ maxWidth: 345 }} variant="outlined">
-      <CardActionArea>
+    <Card
+      sx={{ maxWidth: 345, cursor: exam.completed ? "pointer" : "not-allowed" }}
+      variant="outlined"
+    >
+      <CardActionArea
+        component={RouterLink}
+        href={`/student/exam/${exam._id}`}
+        // style={{ pointerEvents: exam.completed ? "all" : "none" }}
+      >
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            {/* {formatDate(new Date(exam.date))} */}
-            {exam.exam_date}
+            {formatDate(new Date(exam.date))}
           </Typography>
-          <Typography variant="h3" component="div">
+          <Typography variant="h5" component="div">
             <Box
               sx={{
                 display: "flex",
@@ -51,8 +53,18 @@ const ExamCard = ({ exam }) => {
                 justifyContent: "space-between",
               }}
             >
-              <div>{exam.exam_title}</div>
+              <div>{exam.title}</div>
+              <div>
+                <Chip
+                  label={exam.type}
+                  variant="outlined"
+                  color={exam.type === "General" ? "warning" : "success"}
+                />
+              </div>
             </Box>
+          </Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            {exam.description}
           </Typography>
           <Divider />
 
@@ -73,27 +85,71 @@ const ExamCard = ({ exam }) => {
                     {category}
                   </Typography>
                 </Box>
-
                 <AvatarGroup>
+                  {exam[category.toLowerCase()].map((section) => (
+                    <Avatar
+                      sx={{
+                        bgcolor: "primary.main",
+                        width: 20,
+                        height: 20,
+                        fontSize: 9,
+                      }}
+                      key={section.section}
+                    >
+                      {section.section}
+                    </Avatar>
+                  ))}
+                </AvatarGroup>
+                {exam[category.toLowerCase()].length === 0 && (
                   <Avatar
                     sx={{
                       bgcolor: "primary.main",
-                      width: 20,
-                      height: 20,
+                      width: 24,
+                      height: 24,
                       fontSize: 9,
                     }}
-                    // key={section.section}
                   >
-                    {/* {section.section} */}
+                    N/A
                   </Avatar>
-                </AvatarGroup>
+                )}
               </Box>
             )
           )}
         </CardContent>
+
+        {/* {!exam.reading.length &&
+          !exam.listening.length &&
+          !exam.writing.length &&
+          !exam.speaking.length && (
+            <Box
+              sx={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                bgcolor: "rgba(0,0,0,0.9)",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                cursor: "not-allowed",
+              }}
+            >
+              <Chip
+                label="Coming Soon"
+                sx={{
+                  color: theme.palette.common.white,
+                  borderColor: theme.palette.common.white,
+                  backgroundColor: "rgba(255, 255, 255, 0.16)",
+                  borderColor: "rgba(255, 255, 255, 0.16)",
+                  cursor: "inherit",
+                }}
+              />
+            </Box>
+          )} */}
       </CardActionArea>
     </Card>
   );
 };
 
-export default ExamCard;
+export default TestCard;
