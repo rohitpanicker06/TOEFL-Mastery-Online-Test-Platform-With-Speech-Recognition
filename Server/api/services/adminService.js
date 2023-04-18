@@ -14,7 +14,6 @@ async addExam(examObj, response) {
         }
     })
 },
-
 async editExam(examObj, res) {
     const { id,type,title,date} = examObj;
     const result = await AdminExamModel.findOneAndUpdate({id }, {type,title,date},{ runValidators: true});

@@ -2,8 +2,6 @@ import { Box, Button, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockAdminData } from "../../data/mockAdminData";
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import Header from "../../Components/Header/Header";
 import { useEffect, useState } from "react";
 import * as React from 'react';
@@ -33,6 +31,7 @@ const ManageExams = () => {
   const [rows, setRows] = React.useState([]);
   const [rowModesModel, setRowModesModel] = React.useState({});
   const [editClicked, setEditClicked] = useState(false);
+  const [delClicked, setDelClicked] = useState(false);
 
   useEffect(() => {
     getExams().then((data) => {
@@ -95,6 +94,7 @@ EditToolbar.propTypes = {
 
   const handleDeleteClick = (id) => () => {
     setRows(rows.filter((row) => row.id !== id));
+    setDelClicked(true);
   };
 
   const handleCancelClick = (id) => () => {
@@ -112,8 +112,29 @@ EditToolbar.propTypes = {
   const processRowUpdate = (newRow) => {
     const updatedRow = { ...newRow, title:newRow.title, type: newRow.type, date:newRow.date ,isNew: false };
     setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
-    console.log("process update... ", updatedRow);
-    fetch("http://localhost:9000/createExam", {
+    if(editClicked) {
+      fetch("http://localhost:9000/updateExam", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedRow),
+      })
+        .then((response) => {
+          // handle the response
+          if (response.ok) {
+            console.log("Row updated successfully!");
+            alert("row added");
+          } else {
+            console.error("Error updated row:", response.status);
+          }
+        })
+        .catch((error) => {
+          console.error("Error updating row:", error);
+        });
+    }
+    else {
+      fetch("http://localhost:9000/createExam", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -132,6 +153,7 @@ EditToolbar.propTypes = {
         .catch((error) => {
           console.error("Error adding row:", error);
         });
+    }
     return updatedRow;
   };
 
