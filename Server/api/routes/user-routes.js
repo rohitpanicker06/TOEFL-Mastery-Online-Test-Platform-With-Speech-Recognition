@@ -34,4 +34,7 @@ router.route('/createExam')
 router.route('/updateExam')
 .put(adminController.updateExam);
 
+router.route('/deleteExam')
+.delete(adminController.deleteExam);
+
 module.exports = router;

@@ -11,6 +11,9 @@ const adminController = {
     updateExam(request, response){
         adminService.editExam(request.body,response);
     },
+    deleteExam(request, response){
+        adminService.deleteExam(request,response);
+    }
 }
 
 module.exports =  adminController;

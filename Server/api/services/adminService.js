@@ -22,6 +22,15 @@ async editExam(examObj, res) {
       } else {
         res.status(200).json({ message: 'Entry updated successfully' });
       }
+},
+async deleteExam(examObj, res) {
+    const { id } = examObj.query;
+    const result = await AdminExamModel.findOneAndDelete({id },{ runValidators: true});
+    if (!result) {
+        res.status(404).json({ message: 'Exam ID not found' });
+      } else {
+        res.status(200).json({ message: 'Entry deleted successfully' });
+      }
 }
 }
 
