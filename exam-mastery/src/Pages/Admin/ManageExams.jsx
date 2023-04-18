@@ -31,7 +31,6 @@ const ManageExams = () => {
   const [rows, setRows] = React.useState([]);
   const [rowModesModel, setRowModesModel] = React.useState({});
   const [editClicked, setEditClicked] = useState(false);
-  const [delClicked, setDelClicked] = useState(false);
 
   useEffect(() => {
     getExams().then((data) => {
@@ -51,14 +50,6 @@ function EditToolbar(props) {
       ...oldModel,
       [id]: { mode: GridRowModes.Edit, fieldToFocus: 'title' },
     }));
-  };
-
-  const handleInputChange = (e, index) => {
-    //setDisable(false);
-    const { name, value } = e.target;
-    const list = [...rows];
-    list[index][name] = value;
-    setRows(list);
   };
 
   return (
@@ -94,7 +85,24 @@ EditToolbar.propTypes = {
 
   const handleDeleteClick = (id) => () => {
     setRows(rows.filter((row) => row.id !== id));
-    setDelClicked(true);
+    fetch(`http://localhost:9000/deleteExam?id=${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      })
+        .then((response) => {
+          // handle the response
+          if (response.ok) {
+            console.log("Row deleted successfully!");
+            alert("row deleted");
+          } else {
+            console.error("Error deleting row:", response.status);
+          }
+        })
+        .catch((error) => {
+          console.error("Error deleting row:", error);
+        });
   };
 
   const handleCancelClick = (id) => () => {
