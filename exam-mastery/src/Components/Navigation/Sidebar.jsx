@@ -149,8 +149,8 @@ const Sidebar = () => {
               Pages
             </Typography>
             <Item
-              title="About Us"
-              to="/student/about-us"
+              title="Blog"
+              to="/student/blog"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

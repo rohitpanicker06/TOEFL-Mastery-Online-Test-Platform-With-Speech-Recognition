@@ -13,6 +13,7 @@ import TeamMembers from "./Pages/Team/TeamMembers";
 import ManageExams from "./Pages/Admin/ManageExams";
 import PracticeTestDashBoard from "./Pages/PracticeTests/PracticeTestDashBoard";
 import AdminDashboard from "./Pages/Admin/AdminDashboard";
+import Blog from "./Pages/BlogHome/index";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -50,6 +51,7 @@ function App() {
               {<Route path="/admin/manage-exams" element={<ManageExams />} />}
               {<Route path="/student/contact-us" element={<ContactUs />} />}
               {<Route path="/student/faq" element={<FAQ />} />}
+              {<Route path="/student/blog" element={<Blog />} />}
             </Routes>
           </main>
         </div>
