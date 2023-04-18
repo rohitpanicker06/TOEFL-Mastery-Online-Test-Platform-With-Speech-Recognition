@@ -28,4 +28,10 @@ router.route('/getAllexams')
 router.route('/getExams')
 .get(adminController.send);
 
+router.route('/createExam')
+.post(adminController.createExam);
+
+router.route('/updateExam')
+.put(adminController.updateExam);
+
 module.exports = router;

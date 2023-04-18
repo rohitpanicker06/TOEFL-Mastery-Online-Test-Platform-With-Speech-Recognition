@@ -26,16 +26,40 @@ import {
   randomId,
 } from '@mui/x-data-grid-generator';
 
+var exams = null;
+const ManageExams = () => {
+  const theme = useTheme();
+  //const [exams, setExams] = useState([]);
+  const [rows, setRows] = React.useState([]);
+  const [rowModesModel, setRowModesModel] = React.useState({});
+  const [editClicked, setEditClicked] = useState(false);
+
+  useEffect(() => {
+    getExams().then((data) => {
+      console.log("dd:",data);
+      setRows(data);
+    });
+  }, []);
+
+  
 function EditToolbar(props) {
   const { setRows, setRowModesModel } = props;
 
   const handleClick = () => {
-    const id = randomId();
-    setRows((oldRows) => [...oldRows, { id, name: '', age: '', isNew: true }]);
+    const id = parseInt(rows[rows.length-1].id) + 1;
+    setRows((oldRows) => [...oldRows, { id, title: '', date: '', type: '', isNew: true }]);
     setRowModesModel((oldModel) => ({
       ...oldModel,
-      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' },
+      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'title' },
     }));
+  };
+
+  const handleInputChange = (e, index) => {
+    //setDisable(false);
+    const { name, value } = e.target;
+    const list = [...rows];
+    list[index][name] = value;
+    setRows(list);
   };
 
   return (
@@ -52,22 +76,6 @@ EditToolbar.propTypes = {
   setRows: PropTypes.func.isRequired,
 };
 
-var exams = null;
-const ManageExams = () => {
-  const theme = useTheme();
-  //const [exams, setExams] = useState([]);
-  const [rows, setRows] = React.useState([]);
-  const [rowModesModel, setRowModesModel] = React.useState({});
-
-  useEffect(() => {
-    getExams().then((data) => {
-      console.log("dd:",data);
-      setRows(data);
-    });
-  }, []);
-
-  
-
   const handleRowEditStart = (params, event) => {
     event.defaultMuiPrevented = true;
   };
@@ -78,6 +86,7 @@ const ManageExams = () => {
 
   const handleEditClick = (id) => () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
+    setEditClicked(true);
   };
 
   const handleSaveClick = (id) => () => {
@@ -101,8 +110,28 @@ const ManageExams = () => {
   };
 
   const processRowUpdate = (newRow) => {
-    const updatedRow = { ...newRow, isNew: false };
+    const updatedRow = { ...newRow, title:newRow.title, type: newRow.type, date:newRow.date ,isNew: false };
     setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
+    console.log("process update... ", updatedRow);
+    fetch("http://localhost:9000/createExam", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedRow),
+      })
+        .then((response) => {
+          // handle the response
+          if (response.ok) {
+            console.log("Row added successfully!");
+            alert("row added");
+          } else {
+            console.error("Error adding row:", response.status);
+          }
+        })
+        .catch((error) => {
+          console.error("Error adding row:", error);
+        });
     return updatedRow;
   };
 
@@ -117,20 +146,21 @@ const ManageExams = () => {
       field: "title",
       headerName: "Title",
       flex: 1,
-      editable: true
+      editable: true,
     },
     {
       field: "type",
       headerName: "Type",
       headerAlign: "left",
       align: "left",
-      editable: true
+      editable: true,
     },
     {
       field: "date",
       headerName: "Date",
       flex: 1,
-      editable: true
+      editable: true,
+      
     },
     {
       field: 'actions',
