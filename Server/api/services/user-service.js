@@ -52,7 +52,6 @@ async send(userObj, response) {
       var dbo = db.db("quizitdb");
       dbo.collection("Team Members").findOne({}, function(err, result) {
         if (err) throw err;
-        console.log("result.... ", result);
         var jsonArray = result.teamAuthors;
         response.json(jsonArray);
         db.close();
@@ -68,7 +67,7 @@ async sendManageExams(userObj, response) {
     MongoClient.connect(url, function(err, db) {
       if (err) throw err;
       var dbo = db.db("quizitdb");
-      dbo.collection("Manage Exams").find().toArray(function(err, result) {
+      dbo.collection("manage exams").find().toArray(function(err, result) {
         if (err) throw err;
         response.json(result);
         db.close();

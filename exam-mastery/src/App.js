@@ -29,18 +29,13 @@ function App() {
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
-               {
+              {
                 <Route
                   path="/student/dashboard"
                   element={<StudentDashboard />}
                 />
               }
-              {
-                <Route
-                  path="/admin/dashboard"
-                  element={<AdminDashboard />}
-                />
-              }
+              {<Route path="/admin/dashboard" element={<AdminDashboard />} />}
               {
                 <Route
                   path="/student/practice-tests"

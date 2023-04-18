@@ -2,62 +2,88 @@ import React from "react";
 import { Container, Grid, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import ExamCard from "../../Components/Student/PractiseTests/ExamCard";
-
+import axios from "axios";
+import AOS from "aos";
 const PracticeTestDashBoard = () => {
-  //   const [data, setData] = useState();
+  const [data, setData] = useState();
 
-  const data = [
-    {
-      exam_date: "11 March 2023",
-      exam_id: 1,
-      exam_title: "Exam1",
-      test_id: 1,
-    },
-    {
-      exam_date: "12 March 2023",
-      exam_id: 1,
-      exam_title: "Exam2",
-      test_id: 1,
-    },
-    {
-      exam_date: "13 March 2023",
-      exam_id: 1,
-      exam_title: "Exam3",
-      test_id: 1,
-    },
-    {
-      exam_date: "14 March 2023",
-      exam_id: 1,
-      exam_title: "Exam4",
-      test_id: 1,
-    },
-    {
-      exam_date: "12 March 2023",
-      exam_id: 1,
-      exam_title: "Exam5",
-      test_id: 1,
-    },
-    {
-      exam_date: "12 March 2023",
-      exam_id: 1,
-      exam_title: "Exam6",
-      test_id: 1,
-    },
-    {
-      exam_date: "12 March 2023",
-      exam_id: 1,
-      exam_title: "Exam7",
-      test_id: 1,
-    },
-    {
-      exam_date: "12 March 2023",
-      exam_id: 1,
-      exam_title: "Exam8",
-      test_id: 1,
-    },
-  ];
+  async function getExamGetTest() {
+    try {
+      const response1 = await fetch(
+        "http://localhost:8080/exam-mastery/exams",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "*",
+          },
+        }
+      );
+      const exams = await response1.json();
 
-  useEffect(() => {}, []);
+      const response2 = await fetch(
+        "http://localhost:8080/exam-mastery/tests",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "*",
+          },
+        }
+      );
+      const tests = await response2.json();
+      return [exams, tests];
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    getExamGetTest().then((data) => {
+      console.log("data", data);
+      const exams = data[0].sort((a, b) => new Date(b.date) - new Date(a.date));
+      const tests = data[1];
+
+      console.log("exams", exams);
+      console.log("tests", tests);
+      exams.forEach((exam) => {
+        exam["test"] = tests.filter((test) => test.examId === exam._id);
+      });
+      //tests in exam by category
+      exams.forEach((exam) => {
+        exam["reading"] = exam.test
+          .filter((test) => test.category === "Reading")
+          .map((r) => ({ section: r.section }))
+          .sort((a, b) => a.section - b.section);
+        exam["listening"] = exam.test
+          .filter((test) => test.category === "Listening")
+          .map((r) => ({ section: r.section }))
+          .sort((a, b) => a.section - b.section);
+        exam["writing"] = exam.test
+          .filter((test) => test.category === "Writing")
+          .map((r) => ({ section: r.section }))
+          .sort((a, b) => a.section - b.section);
+        exam["speaking"] = exam.test
+          .filter((test) => test.category === "Speaking")
+          .map((r) => ({ section: r.section }))
+          .sort((a, b) => a.section - b.section);
+        if (
+          !exam["reading"].length ||
+          !exam["listening"].length ||
+          !exam["writing"].length ||
+          !exam["speaking"].length
+        ) {
+          exam["completed"] = false;
+        } else {
+          exam["completed"] = true;
+        }
+      });
+      console.log("exams2212", exams);
+      setData(exams);
+    });
+  }, []);
 
   return (
     <Container maxWidth="xl">
@@ -65,7 +91,7 @@ const PracticeTestDashBoard = () => {
         Select any of the test to get started!
       </Typography>
       <Grid container spacing={4}>
-        {data.map((exam, index) => (
+        {data?.map((exam, index) => (
           <Grid
             item
             xs={12}
