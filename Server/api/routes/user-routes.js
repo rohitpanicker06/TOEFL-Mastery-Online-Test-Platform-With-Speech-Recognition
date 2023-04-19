@@ -4,6 +4,7 @@ const emailController = require("../controllers/emailController");
 const memberController = require("../controllers/memberController");
 const examController = require("../controllers/examController");
 const adminController = require("../controllers/adminController");
+const StudentHistoryContoller = require("../controllers/StudentHistoryContoller");
 
 const router = express.Router();
 
@@ -27,8 +28,6 @@ router.route("/email").post(emailController.send);
 
 router.route("/getTeamMembers").get(memberController.send);
 
-// router.route("/getAllexams").get(examController.send);
-
 router.route("/getExams").get(adminController.send);
 
 router.route("/createExam").post(adminController.createExam);
@@ -42,5 +41,15 @@ router.get("/exams", examController.findExam);
 
 //get All Tests
 router.get("/tests", examController.findTests);
+
+router.route("/exams/:id/tests").get(examController.findTestsById);
+
+router
+  .route("/students/:email/testHistory")
+  .post(StudentHistoryContoller.createTestHistory);
+
+router
+  .route("/students/:email/testHistory")
+  .get(StudentHistoryContoller.findStudentByEmail);
 
 module.exports = router;
