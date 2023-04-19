@@ -36,6 +36,14 @@ router.route("/updateExam").put(adminController.updateExam);
 
 router.route("/deleteExam").delete(adminController.deleteExam);
 
+router.route("/getTests").get(adminController.sendTests);
+
+router.route("/createTest").post(adminController.createTest);
+
+router.route("/updateTest").put(adminController.updateTest);
+
+router.route("/deleteTest").delete(adminController.deleteTest);
+
 //get All Exams
 router.get("/exams", examController.findExam);
 
