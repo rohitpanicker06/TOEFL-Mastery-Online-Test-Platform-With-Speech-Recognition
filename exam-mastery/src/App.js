@@ -24,6 +24,7 @@ import Contact from "./Pages/LandingPage/Contact";
 import Footer from "./Pages/LandingPage/Footer";
 import Navbar from "./Pages/LandingPage/Navbar";
 import "./App.css";
+import Login from "./Pages/Login/Login";
 
 
 
@@ -31,6 +32,7 @@ import "./App.css";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
+  const [auth, setAuth] = useState(true);
   const navigate = useNavigate(); // adding this line to get the navigate function
 
 
@@ -42,14 +44,17 @@ function App() {
         
         
         
-          <Sidebar isSidebar={isSidebar} />
+          {/* <Sidebar isSidebar={isSidebar} /> */}
           {/* <AdminSidebar isSidebar={isSidebar} /> */}
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes >
               {
-            <Route path="/Home"
-            element={<Home/>}/>}
+                <Route path="/login" element={<Login setAuth={setAuth} />} /> 
+              }
+              {
+            <Route path="/"
+              element={<><Home/> <About /> <Work /> <Testimonial /> <Contact /> <Footer /></>}/>}
                {
                 <Route
                   path="/student/dashboard"
@@ -74,7 +79,7 @@ function App() {
               {<Route path="/student/faq" element={<FAQ />} />}
               {<Route path="/student/blog" element={<Blog />} />}
               {<Route path="/student/blog/:id" element={<BlogList />} />}
-              {<Route path="/Home" element={<Home />} />}
+              {/* {<Route path="/Home" element={<Home />} />} */}
               <Route
                 path="*"
                 element={() => {

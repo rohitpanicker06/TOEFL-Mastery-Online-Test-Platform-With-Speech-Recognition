@@ -16,12 +16,17 @@ import InfoIcon from "@mui/icons-material/Info";
 import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
 import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
-
+import { useNavigate } from "react-router-dom";
 
 
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
+  let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+    let path = `/Login/Login`; 
+    navigate(path);
+  }
   const menuOptions = [
     {
       text: "Home",
@@ -60,7 +65,7 @@ const Navbar = () => {
 
         </a>
         <button
-         className="primary-button" >
+         className="primary-button"  onClick={routeChange} >
           Log in
           
           </button>

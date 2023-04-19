@@ -11,6 +11,7 @@
     "@fullcalendar/timegrid": "^6.1.5",
     "@iconify/react": "^4.1.0",
     "@mui/icons-material": "^5.11.11",
+    "@mui/lab": "^5.0.0-alpha.127",
     "@mui/material": "^5.11.15",
     "@mui/x-data-grid": "^6.0.4",
     "@mui/x-data-grid-generator": "^6.2.0",
