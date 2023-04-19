@@ -13,18 +13,16 @@ class BarChart extends Component {
 
   render() {
     return (
-      <div className="app">
-        <div className="row">
-          <div className="mixed-chart">
-            <Chart
-              options={this.state.options}
-              series={this.state.series}
-              type="bar"
-              width="700"
-            />
-          </div>
-        </div>
+      <div className="app" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+      <div className="mixed-chart" style={{ width: '100%', maxWidth: '700px' }}>
+        <Chart
+          options={this.state.options}
+          series={this.state.series}
+          type="bar"
+          width="100%"
+        />
       </div>
+    </div>
     );
   }
 }

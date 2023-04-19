@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.mixed-chart {
+  width: 100%;
+  max-width: 700px;
+}
+
+@media only screen and (max-width: 768px) {
+  .mixed-chart {
+    max-width: 500px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .mixed-chart {
+    max-width: 300px;
+  }
+}

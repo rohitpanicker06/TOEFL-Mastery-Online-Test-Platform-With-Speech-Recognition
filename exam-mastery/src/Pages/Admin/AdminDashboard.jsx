@@ -193,7 +193,7 @@ const AdminDashboard = () => {
               ][index],
               image: `https://www.google.com/url?sa=i&url=https%3A%2F%2Fuxwing.com%2Fuser-profile-icon%2F&psig=AOvVaw0KejkpKrPBU69l9kI0VFnh&ust=1680933016016000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKDLj9GJl_4CFQAAAAAdAAAAABAQ`,
 
-              proficiency: 8.5 - index,
+              proficiency: 119 - index,
             }))}
           />
         </Grid>
