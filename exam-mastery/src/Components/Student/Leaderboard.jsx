@@ -52,8 +52,8 @@ function Item({ item }) {
 
       <Typography variant="caption" sx={{ pr: 3, flexShrink: 0 }}>
         <Chip
-          label={"Band " + proficiency}
-          color={proficiency < 6.5 ? "warning" : "success"}
+          label={"Scores " + proficiency}
+          color={proficiency < 80 ? "warning" : "success"}
         />
       </Typography>
     </Stack>

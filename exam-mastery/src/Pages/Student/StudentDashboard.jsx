@@ -23,7 +23,7 @@ const StudentDashboard = () => {
     <Container maxWidth="xl">
       <Box sx={{ display: "flex", alignItems: "center", mb: 5 }}>
         <Typography variant="h4" sx={{}}>
-          Hi, Welcomeeeeeee Rutuja
+          Hi, Welcome Student
         </Typography>
       </Box>
 
@@ -104,19 +104,19 @@ const StudentDashboard = () => {
             chartData={[
               {
                 name: "Reading",
-                data: [5, 7, 6, 8, 9],
+                data: [25, 27, 26, 28, 29],
               },
               {
                 name: "Listening",
-                data: [8, 6.5, 4, 8, 9],
+                data: [28, 26, 24, 28, 29],
               },
               {
                 name: "Writing",
-                data: [6, 4.5, 8, 6, 9],
+                data: [26, 24, 28, 26, 29],
               },
               {
                 name: "Speaking",
-                data: [5, 8, 4, 7, 6],
+                data: [25, 28, 24, 27, 26],
               },
             ]}
           />
@@ -162,9 +162,13 @@ const StudentDashboard = () => {
                 "Academic",
                 "Academic",
               ][index],
-              image: `https://www.google.com/url?sa=i&url=https%3A%2F%2Fuxwing.com%2Fuser-profile-icon%2F&psig=AOvVaw0KejkpKrPBU69l9kI0VFnh&ust=1680933016016000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKDLj9GJl_4CFQAAAAAdAAAAABAQ`,
-
-              proficiency: 8.5 - index,
+              image: [`../../assets/userprofile2.png`,
+               `../../assets/userprofile1.png`,
+               `../../assets/userprofile.png`,
+               `../../assets/userprofile3.png`,
+               `../../assets/userprofile4.png`,
+              ][index],
+              proficiency: 119 - index,
             }))}
           />
         </Grid>
