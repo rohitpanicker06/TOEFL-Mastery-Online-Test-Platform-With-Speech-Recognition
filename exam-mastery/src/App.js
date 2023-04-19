@@ -16,6 +16,16 @@ import PracticeTestDashBoard from "./Pages/PracticeTests/PracticeTestDashBoard";
 import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import Blog from "./Pages/BlogHome/index";
 import BlogList from "./Pages/BlogList/index"
+import Home from "./Pages/LandingPage/Home";
+import About from "./Pages/LandingPage/About";
+import Work from "./Pages/LandingPage/Work";
+import Testimonial from "./Pages/LandingPage/Testimonial";
+import Contact from "./Pages/LandingPage/Contact";
+import Footer from "./Pages/LandingPage/Footer";
+import Navbar from "./Pages/LandingPage/Navbar";
+import "./App.css";
+
+
 
 
 function App() {
@@ -29,11 +39,17 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
+        
+        
+        
           <Sidebar isSidebar={isSidebar} />
           {/* <AdminSidebar isSidebar={isSidebar} /> */}
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />
-            <Routes>
+            <Routes >
+              {
+            <Route path="/Home"
+            element={<Home/>}/>}
                {
                 <Route
                   path="/student/dashboard"
@@ -58,6 +74,7 @@ function App() {
               {<Route path="/student/faq" element={<FAQ />} />}
               {<Route path="/student/blog" element={<Blog />} />}
               {<Route path="/student/blog/:id" element={<BlogList />} />}
+              {<Route path="/Home" element={<Home />} />}
               <Route
                 path="*"
                 element={() => {
