@@ -3,9 +3,9 @@ import { Link as RouterLink } from "react-router-dom";
 import { Container, Typography, Link, Box, Divider } from "@mui/material";
 import styled from "@emotion/styled";
 
-import SocialAuth from "../components/SocialAuth";
-import SignupForm from "../components/SignupForm";
-import Logo from "../components/Logo";
+import SocialAuth from "../../Components/LoginForms/SocialAuth";
+import SignupForm from "../../Components/LoginForms/SignupForm";
+
 import { motion } from "framer-motion";
 
 //////////////////////////////////
@@ -53,7 +53,7 @@ const Signup = ({ setAuth }) => {
       <Container maxWidth="sm">
         <ContentStyle>
           <HeadingStyle component={motion.div} {...fadeInUp}>
-            <Logo />
+           
 
             <Typography sx={{ color: "text.secondary", mb: 5 }}>
               Enter your details below.

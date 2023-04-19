@@ -1,15 +1,15 @@
-// import React from "react";
-// import { Link } from "react-router-dom";
-// import { Box } from "@mui/material";
+import React from "react";
+import { Link } from "react-router-dom";
+import { Box } from "@mui/material";
 
-// const Logo = () => {
-//   return (
-//     <Box>
-//       <Link to="/">
+const Logo = () => {
+  return (
+    <Box>
+      <Link to="/">
        
-//       </Link>
-//     </Box>
-//   );
-// };
+      </Link>
+    </Box>
+  );
+};
 
-// export default Logo;
+export default Logo;

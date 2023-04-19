@@ -25,6 +25,8 @@ import Footer from "./Pages/LandingPage/Footer";
 import Navbar from "./Pages/LandingPage/Navbar";
 import "./App.css";
 import Login from "./Pages/Login/Login";
+import SingUp from "./Pages/Login/Signup";
+import Signup from "./Pages/Login/Signup";
 
 
 
@@ -50,8 +52,13 @@ function App() {
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes >
               {
-                <Route path="/login" element={<Login setAuth={setAuth} />} /> 
+                <Route path="/login" element={<Login />} /> 
               }
+
+              {
+                <Route path="/signup" element={<Signup/>} />
+              }
+             
               {
             <Route path="/"
               element={<><Home/> <About /> <Work /> <Testimonial /> <Contact /> <Footer /></>}/>}

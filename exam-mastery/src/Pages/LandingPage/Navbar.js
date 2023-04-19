@@ -24,7 +24,7 @@ const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
   let navigate = useNavigate(); 
   const routeChange = () =>{ 
-    let path = `/Login/Login`; 
+    let path = '/login'; 
     navigate(path);
   }
   const menuOptions = [
