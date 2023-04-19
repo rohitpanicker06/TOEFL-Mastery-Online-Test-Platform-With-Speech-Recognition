@@ -27,8 +27,6 @@ router.route("/email").post(emailController.send);
 
 router.route("/getTeamMembers").get(memberController.send);
 
-// router.route("/getAllexams").get(examController.send);
-
 router.route("/getExams").get(adminController.send);
 
 router.route("/createExam").post(adminController.createExam);
@@ -42,5 +40,7 @@ router.get("/exams", examController.findExam);
 
 //get All Tests
 router.get("/tests", examController.findTests);
+
+router.route("/exams/:id/tests").get(examController.findTestsById);
 
 module.exports = router;
