@@ -1,4 +1,3 @@
-const examService = require("../services/examService");
 const Exam = require("../models/exam");
 const Test = require("../models/test");
 
