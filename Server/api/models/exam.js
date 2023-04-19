@@ -1,9 +1,41 @@
-const mongoose = require("mongoose");
+const Mongoose = require('../app.js');
 
-module.exports = mongoose.model("Exam", {
-  type: { type: String, requied: true },
-  title: { type: String, required: true, unique: true },
-  date: { type: Date, required: true },
-  createdAt: { type: Date, required: true },
-  updatedAt: { type: Date, required: true },
-});
+// created table Schema for todo 
+const AdminTestSchema = new Mongoose.Schema({ 
+    "id": {
+    type : String,
+    required: true
+    },
+    "title": {
+        type : String,
+        required: true,
+        unique: true
+    },
+    "date" : {
+        type : String,
+        required: true
+    },
+    "type": {
+        type: String,
+        required: true
+    },
+    "createdAt": {
+      type: String,
+      required: true
+    },
+    "updatedAt": {
+      type: String,
+      required: true
+  }
+},
+{
+    versionKey: false
+}
+)
+
+//AdminSchema.virtual('id', () => this._id.toHexString())
+AdminTestSchema.set('toJSON', {virtuals: true})
+
+const AdminTest =  Mongoose.model('Exams', AdminTestSchema);
+
+module.exports = AdminTest;

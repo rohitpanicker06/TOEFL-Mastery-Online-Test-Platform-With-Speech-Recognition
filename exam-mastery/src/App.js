@@ -29,17 +29,17 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          <Sidebar isSidebar={isSidebar} />
-          {/* <AdminSidebar isSidebar={isSidebar} /> */}
+          {/* <Sidebar isSidebar={isSidebar} /> */}
+          <AdminSidebar isSidebar={isSidebar} />
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
-               {
+               {/* {
                 <Route
                   path="/student/dashboard"
                   element={<StudentDashboard />}
                 />
-              }
+              } */}
               {
                 <Route
                   path="/admin/dashboard"
