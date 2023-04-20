@@ -11,43 +11,59 @@ var members = null;
 const TeamMembers = () => {
   const theme = useTheme();
   const [members, setMembers] = useState([]);
+  const [email, setEmail] = useState(localStorage.getItem("email"));
+
+  async function getexamhistory() {
+    const data = await fetch(
+      `http://localhost:8080/exam-mastery/students/${email}/testHistory`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": "*",
+        },
+      }
+    );
+    const testHistory = await data.json();
+    return testHistory.map((historyItem) => ({
+      ...historyItem,
+      id: historyItem.testId,
+    }));
+  }
 
   useEffect(() => {
-    getTeamMembers().then((data) => {
-      setMembers(data);
+    getexamhistory().then((data) => {
+      console.log("testHistory", data[0].testHistory);
+      setMembers(data[0].testHistory);
     });
   }, []);
   const colors = tokens(theme.palette.mode);
   const columns = [
-    { field: "id", headerName: "ID" },
+    // { field: "testId", headerName: "Test Id" },
     {
-      field: "name",
-      headerName: "Name",
+      field: "testType",
+      headerName: "Test Type",
       flex: 1,
       cellClassName: "name-column--cell",
     },
     {
-      field: "age",
-      headerName: "Age",
+      field: "section",
+      headerName: "Section",
       type: "number",
       headerAlign: "left",
       align: "left",
     },
     {
-      field: "phone",
-      headerName: "Phone Number",
-      flex: 1,
-    },
-    {
-      field: "email",
-      headerName: "Email",
+      field: "score",
+      headerName: "Score",
       flex: 1,
     },
   ];
 
   return (
     <Box m="20px">
-      <Header title="TEAM" subtitle="Team Members" />
+      <Header title="Test History" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -77,7 +93,12 @@ const TeamMembers = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={members} columns={columns} />
+        <DataGrid
+          checkboxSelection
+          rows={members}
+          columns={columns}
+          getRowId={(row) => row.testId}
+        />
       </Box>
     </Box>
   );
@@ -101,6 +122,5 @@ function getTeamMembers() {
     xhr.send(data);
   });
 }
-
 
 export default TeamMembers;

@@ -100,7 +100,7 @@ function App() {
                 />
               }
               {<Route path="/student/exam/:id" Component={Exam} />}
-              {<Route path="/student/team-members" element={<TeamMembers />} />}
+              {<Route path="/student/test-history" element={<TeamMembers />} />}
               {<Route path="/admin/manage-exams" element={<ManageExams />} />}
               {<Route path="/student/contact-us" element={<ContactUs />} />}
               {<Route path="/student/faq" element={<FAQ />} />}

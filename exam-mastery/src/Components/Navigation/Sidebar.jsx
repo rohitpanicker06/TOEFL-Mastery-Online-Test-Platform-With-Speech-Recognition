@@ -135,7 +135,7 @@ const Sidebar = () => {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
-              to={"/student/dashboard?"+ localStorage.getItem("role")}
+              to={"/student/dashboard?" + localStorage.getItem("role")}
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -156,8 +156,8 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Team Members"
-              to={"/student/team-members?" + localStorage.getItem("role")}
+              title="Test History"
+              to={"/student/test-history?" + localStorage.getItem("role")}
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
