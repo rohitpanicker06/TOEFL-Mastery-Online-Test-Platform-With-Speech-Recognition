@@ -36,6 +36,7 @@
     transform: rotate(360deg);
   }
 }
+<<<<<<< HEAD
 * {
   margin: 0;
   padding: 0;
@@ -465,3 +466,30 @@ nav {
   }
 }
 
+=======
+
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.mixed-chart {
+  width: 100%;
+  max-width: 700px;
+}
+
+@media only screen and (max-width: 768px) {
+  .mixed-chart {
+    max-width: 500px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .mixed-chart {
+    max-width: 300px;
+  }
+}
+>>>>>>> 8beee32788870172c76d5b213b7e5bbcdfe0a591

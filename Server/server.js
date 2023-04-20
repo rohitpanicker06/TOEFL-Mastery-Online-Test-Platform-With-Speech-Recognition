@@ -8,7 +8,12 @@
 // app.use(bodyParser.urlencoded({extended:false}));
 // app.use(bodyParser.json());
 // // Only allow requests from our client
- 
+// const corsOptions ={
+//   origin:'http://localhost:3000',
+//   credentials:true,            //access-control-allow-credentials:true
+//   optionSuccessStatus:200
+// }
+// app.use(cors(corsOptions));
 
 // app.use(require('./api/utils/cors'));
 // app.use("/",userRoute);
@@ -42,21 +47,29 @@ const corsOptions ={
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200
 }
-app.use(cors(corsOptions));
+
 var methodOverride = require("method-override");
 var mongoose = require("mongoose");
 //configure ===========
 //set port
 var port = process.env.PORT || 8080;
 //connect to our mongoDB database
-mongoose.connect(
-  "mongodb+srv://mandlikr:%40Rutuja11@cluster0.vgnobys.mongodb.net/exam_mastery",
-  { useNewUrlParser: true }
-);
+try{
+  mongoose.connect(
+    "mongodb+srv://mandlikr:%40Rutuja11@cluster0.vgnobys.mongodb.net/exam_mastery",
+    { useNewUrlParser: true }
+  );
+}
+catch(error){
+  console.log("ee:",error);
+}
+
 
 //get app data/stuff of the body(POST request) parameters
 //parse application/json
 app.use(bodyParser.json());
+
+app.use(cors(corsOptions));
 //parse application/vnd+api as json
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 //parse

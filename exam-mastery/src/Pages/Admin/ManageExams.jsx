@@ -85,7 +85,7 @@ EditToolbar.propTypes = {
 
   const handleDeleteClick = (id) => () => {
     setRows(rows.filter((row) => row.id !== id));
-    fetch(`http://localhost:9000/deleteExam?id=${id}`, {
+    fetch(`http://localhost:8080/exam-mastery/deleteExam?id=${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -118,10 +118,10 @@ EditToolbar.propTypes = {
   };
 
   const processRowUpdate = (newRow) => {
-    const updatedRow = { ...newRow, title:newRow.title, type: newRow.type, date:newRow.date ,isNew: false };
+    const updatedRow = { ...newRow, title:newRow.title, type: newRow.type, date:newRow.date,isNew: false };
     setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
     if(editClicked) {
-      fetch("http://localhost:9000/updateExam", {
+      fetch("http://localhost:8080/exam-mastery/updateExam", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -142,7 +142,7 @@ EditToolbar.propTypes = {
         });
     }
     else {
-      fetch("http://localhost:9000/createExam", {
+      fetch("http://localhost:8080/exam-mastery/createExam", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -282,7 +282,7 @@ function getExams() {
       }
     });
 
-    xhr.open("GET", "http://localhost:9000/getExams");
+    xhr.open("GET", "http://localhost:8080/exam-mastery/getExams");
     xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.send(data);

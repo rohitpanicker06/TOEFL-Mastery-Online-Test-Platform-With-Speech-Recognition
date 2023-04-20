@@ -1,205 +1,308 @@
-import React from "react";
-import { Box, Typography, Container, Grid, Link } from "@mui/material";
-import Summary from "../../Components/Student/Summary";
+import * as React from 'react';
+import { Box, Typography, Container, Button, useTheme, Grid, Link } from "@mui/material";
 import { useEffect, useState } from "react";
-import SectionWiseComparisonChart from "../Student/SectionWiseComparisonChart";
-import SomeComponent from "../../Components/Student/SomeComponent";
-import Leaderboard from "../../Components/Student/Leaderboard";
-import Iconify from "../../Components/Iconify/Iconify";
-import SuggestedStudyMaterial from "../../Components/Student/SuggestedStudyMaterial";
-import Avatar from "@mui/material/Avatar";
+import { DataGrid } from "@mui/x-data-grid";
+import { tokens } from "../../theme";
+import PropTypes from 'prop-types';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+import SaveIcon from '@mui/icons-material/Save';
+import CancelIcon from '@mui/icons-material/Close';
+
+import {
+  GridRowModes,
+  DataGridPro,
+  GridToolbarContainer,
+  GridActionsCellItem,
+} from '@mui/x-data-grid-pro';
+import {
+  randomCreatedDate,
+  randomTraderName,
+  randomUpdatedDate,
+  randomId,
+} from '@mui/x-data-grid-generator';
+import { yellow } from '@mui/material/colors';
 
 const AdminDashboard = () => {
-  const [userData, setUserData] = useState({});
-  const [summary, setSummary] = useState({
-  });
-  const [timeline, setTimeline] = useState([]);
+  const theme = useTheme();
+  const [rows, setRows] = React.useState([]);
+  const [rowModesModel, setRowModesModel] = React.useState({});
+  const [editClicked, setEditClicked] = useState(false);
+
+  useEffect(() => {
+    getExams().then((data) => {
+      console.log("dd:",data);
+      setRows(data);
+    });
+  }, []);
+
+function EditToolbar(props) {
+  const { setRows, setRowModesModel } = props;
+
+  const handleClick = () => {
+    const createdAtDate = new Date();
+    const updatedAtDate = new Date();
+    const id = parseInt(rows[rows.length-1].id) + 1;
+    setRows((oldRows) => [...oldRows, { id, title: '', date: '', type: '', createdAt: createdAtDate,updatedAt:updatedAtDate, isNew: true }]);
+    setRowModesModel((oldModel) => ({
+      ...oldModel,
+      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'title' },
+    }));
+  };
 
   return (
-    <Container maxWidth="xl">
-      <Box sx={{ display: "flex", alignItems: "center", mb: 5 }}>
-        <Typography variant="h4" sx={{}}>
-          Hi, Welcome Admin
-        </Typography>
-      </Box>
 
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6} md={3} data-aos="fade-up">
-          <Summary
-            title="Reading"
-            total={summary.reading}
-            color="success"
-            icon={"fluent-mdl2:reading-mode"}
-          />
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={6}
-          md={3}
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          <Summary
-            title="Listening"
-            total={summary.listening}
-            color="info"
-            icon={"grommet-icons:assist-listening"}
-          />
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={6}
-          md={3}
-          data-aos="fade-up"
-          data-aos-delay="400"
-        >
-          <Summary
-            title="Writing"
-            total={summary.writing}
-            color="warning"
-            icon={"icon-park-outline:writing-fluently"}
-          />
-        </Grid>
+    <GridToolbarContainer>
+      <Button style= {{color:"white", backgroundColor:"violet"}} startIcon={<AddIcon />} onClick={handleClick}>
+        CREATE TEST
+      </Button>
+    </GridToolbarContainer>
 
-        <Grid
-          item
-          xs={12}
-          sm={6}
-          md={3}
-          data-aos="fade-up"
-          data-aos-delay="600"
-        >
-          <Summary
-            title="Speaking"
-            total={summary.speaking}
-            color="error"
-            icon={"iconoir:mic-speaking"}
-          />
-        </Grid>
+  );
+}
 
-        <Grid
-          item
-          xs={12}
-          md={6}
-          lg={8}
-          data-aos="fade-up"
-          data-aos-delay="800"
-        >
-          <SectionWiseComparisonChart
-            title="Section Wise Comparison"
-            subheader="This is a comparison of your performance in each section from all the tests you have taken"
-            chartLabels={[
-              "01/01/2003",
-              "02/01/2003",
-              "03/01/2003",
-              "04/01/2003",
-              "05/01/2003",
-            ]}
-            chartData={[
-              {
-                name: "Reading",
-                data: [5, 7, 6, 8, 9],
-              },
-              {
-                name: "Listening",
-                data: [8, 6.5, 4, 8, 9],
-              },
-              {
-                name: "Writing",
-                data: [6, 4.5, 8, 6, 9],
-              },
-              {
-                name: "Speaking",
-                data: [5, 8, 4, 7, 6],
-              },
-            ]}
-          />
-        </Grid>
+EditToolbar.propTypes = {
+  setRowModesModel: PropTypes.func.isRequired,
+  setRows: PropTypes.func.isRequired,
+};
 
-        <Grid item xs={12} md={6} lg={4} data-aos="fade-in">
-          <SuggestedStudyMaterial
-            title="Study Material"
-            subheader="Handpicked recommendations for you"
-            list={[
-              {
-                name: "Reading",
-                value: "Youtube",
-                icon: (
-                  <Iconify icon={"uit:youtube"} color="#1877F2" width={32} />
-                ),
-                link: "https://www.youtube.com/",
-              },
-              {
-                name: "Listening",
-                value: "BYJU",
-                icon: (
-                  <Iconify
-                    icon={"simple-icons:byjus"}
-                    color="#DF3E30"
-                    width={32}
-                  />
-                ),
-                link: "https://www.byju.com/",
-              },
-              {
-                name: "Speaking",
-                value: "Udemy",
-                icon: (
-                  <Iconify
-                    icon={"logos:udemy-icon"}
-                    color="#006097"
-                    width={32}
-                  />
-                ),
-                link: "https://www.udemy.com/",
-              },
-              {
-                name: "Writing",
-                value: "Coursera",
-                icon: (
-                  <Iconify
-                    icon={"academicons:coursera-square"}
-                    color="#1C9CEA"
-                    width={32}
-                  />
-                ),
-                link: "https://www.coursera.com/",
-              },
-            ]}
-          />
-        </Grid>
+  const handleRowEditStart = (params, event) => {
+    event.defaultMuiPrevented = true;
+  };
 
-        <Grid item xs={12} md={6} lg={8} data-aos="fade-in">
-          <Leaderboard
-            title="Leaderboard"
-            subheader="Top 5 students on our platform"
-            list={[...Array(5)].map((_, index) => ({
-              id: index,
-              title: [
-                "Raj Shekhawat",
-                "John Miller",
-                "Melanie Diaz",
-                "Cece Patel",
-                "Xinzhuo Liu",
-              ][index],
-              description: [
-                "General",
-                "Academic",
-                "General",
-                "Academic",
-                "Academic",
-              ][index],
-              image: `https://www.google.com/url?sa=i&url=https%3A%2F%2Fuxwing.com%2Fuser-profile-icon%2F&psig=AOvVaw0KejkpKrPBU69l9kI0VFnh&ust=1680933016016000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCKDLj9GJl_4CFQAAAAAdAAAAABAQ`,
+  const handleRowEditStop = (params, event) => {
+    event.defaultMuiPrevented = true;
+  };
 
-              proficiency: 8.5 - index,
-            }))}
-          />
-        </Grid>
-      </Grid>
-    </Container>
+  const handleEditClick = (id) => () => {
+    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
+    setEditClicked(true);
+  };
+
+  const handleSaveClick = (id) => () => {
+    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
+  };
+
+  const handleDeleteClick = (id) => () => {
+    setRows(rows.filter((row) => row.id !== id));
+    fetch(`http://localhost:8080/exam-mastery/deleteTest?id=${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      })
+        .then((response) => {
+          // handle the response
+          if (response.ok) {
+            console.log("Row deleted successfully!");
+            alert("row deleted");
+          } else {
+            console.error("Error deleting row:", response.status);
+          }
+        })
+        .catch((error) => {
+          console.error("Error deleting row:", error);
+        });
+  };
+
+  const handleCancelClick = (id) => () => {
+    setRowModesModel({
+      ...rowModesModel,
+      [id]: { mode: GridRowModes.View, ignoreModifications: true },
+    });
+
+    const editedRow = rows.find((row) => row.id === id);
+    if (editedRow.isNew) {
+      setRows(rows.filter((row) => row.id !== id));
+    }
+  };
+
+  const processRowUpdate = (newRow) => {
+    const updatedAtDate = new Date();
+    const updatedRow = { ...newRow, title:newRow.title, type: newRow.type, date:newRow.date,isNew: false };
+    const updatedRowEdit = { ...newRow, title:newRow.title, type: newRow.type, date:newRow.date, updatedAt:updatedAtDate ,isNew: false };
+    setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
+    if(editClicked) {
+      fetch("http://localhost:8080/exam-mastery/updateTest", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedRowEdit),
+      })
+        .then((response) => {
+          // handle the response
+          if (response.ok) {
+            console.log("Row updated successfully!");
+            alert("row added");
+          } else {
+            console.error("Error updated row:", response.status);
+          }
+        })
+        .catch((error) => {
+          console.error("Error updating row:", error);
+        });
+        setRows(rows.map((row) => (row.id === newRow.id ? updatedRowEdit : row)));
+        return updatedRowEdit;
+    }
+    else {
+      fetch("http://localhost:8080/exam-mastery/createTest", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedRow),
+      })
+        .then((response) => {
+          // handle the response
+          if (response.ok) {
+            console.log("Row added successfully!");
+            alert("row added");
+          } else {
+            console.error("Error adding row:", response.status);
+          }
+        })
+        .catch((error) => {
+          console.error("Error adding row:", error);
+        });
+        return updatedRow;
+    }
+  };
+
+  const handleRowModesModelChange = (newRowModesModel) => {
+    setRowModesModel(newRowModesModel);
+  };
+
+  const colors = tokens(theme.palette.mode);
+  const columns = [
+    { field: "id", headerName: "ID" },
+    {
+      field: "title",
+      headerName: "Title",
+      flex: 1,
+      editable: true,
+    },
+    {
+      field: "type",
+      headerName: "Type",
+      headerAlign: "left",
+      align: "left",
+      editable: true,
+    },
+    {
+      field: "date",
+      headerName: "Date",
+      flex: 1,
+      editable: true,
+    },
+    {
+      field: "createdAt",
+      headerName: "Created At",
+      flex: 1,
+      editable: false,
+    },
+    {
+      field: "updatedAt",
+      headerName: "Updated At",
+      flex: 1,
+      editable: false,
+    },
+    {
+      field: 'actions',
+      type: 'actions',
+      headerName: 'Actions',
+      width: 100,
+      cellClassName: 'actions',
+      getActions: ({ id }) => {
+        const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
+
+        if (isInEditMode) {
+          return [
+            <GridActionsCellItem
+              icon={<SaveIcon />}
+              label="Save"
+              onClick={handleSaveClick(id)}
+            />,
+            <GridActionsCellItem
+              icon={<CancelIcon />}
+              label="Cancel"
+              className="textPrimary"
+              onClick={handleCancelClick(id)}
+              color="inherit"
+            />,
+          ];
+        }
+
+        return [
+          <GridActionsCellItem
+            icon={<EditIcon />}
+            label="Edit"
+            className="textPrimary"
+            onClick={handleEditClick(id)}
+            color="inherit"
+          />,
+          <GridActionsCellItem
+            icon={<DeleteIcon />}
+            label="Delete"
+            onClick={handleDeleteClick(id)}
+            color="inherit"
+          />,
+        ];
+      },
+    },
+  ];
+
+  return (
+    <Box
+      sx={{
+        height: 500,
+        width: '100%',
+        '& .actions': {
+          color: 'text.secondary',
+        },
+        '& .textPrimary': {
+          color: 'text.primary',
+        },
+      }}
+    >
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        editMode="row"
+        rowModesModel={rowModesModel}
+        onRowModesModelChange={handleRowModesModelChange}
+        onRowEditStart={handleRowEditStart}
+        onRowEditStop={handleRowEditStop}
+        processRowUpdate={processRowUpdate}
+        slots={{
+          toolbar: EditToolbar,
+        }}
+        slotProps={{
+          toolbar: { setRows, setRowModesModel },
+        }}
+      />
+    </Box>
   );
 };
+
+function getExams() {
+  return new Promise((resolve, reject) => {
+    const data = "";
+    const xhr = new XMLHttpRequest();
+
+    xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        //console.log("errrr:",this);
+        resolve(JSON.parse(this.responseText));
+      }
+    });
+
+    xhr.open("GET", "http://localhost:8080/exam-mastery/getTests");
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.send(data);
+  });
+}
 
 export default AdminDashboard;

@@ -62,22 +62,6 @@ async send(userObj, response) {
 
 },
 
-async sendManageExams(userObj, response) {
-    var MongoClient = require('mongodb').MongoClient;
-    var url = "mongodb://0.0.0.0:27017";
-    
-    MongoClient.connect(url, function(err, db) {
-      if (err) throw err;
-      var dbo = db.db("quizitdb");
-      dbo.collection("manage exams").find().toArray(function(err, result) {
-        if (err) throw err;
-        response.json(result);
-        db.close();
-      });
-    });
-
-},
-
 // login(userObj, response) {
 //         console.log("uu:",userObj);
 //         userModel.findOne({email:userObj.email}, (err, data) => {

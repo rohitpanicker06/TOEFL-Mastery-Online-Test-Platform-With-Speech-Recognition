@@ -1,47 +1,67 @@
-import QuestionsView from "../../../components/TestComponents/QuestionsView/QuestionView";
+import QuestionsView from "../../../Components/TestComponents/QuestionView/QuestionView";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { Fab } from "@mui/material";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import axios from "axios";
+import { Route, Link, Routes, useParams } from "react-router-dom";
+import { useRoute } from "@react-navigation/native";
 
-export default function exam() {
+export default function Exam() {
   const handle = useFullScreenHandle();
   const theme = useTheme();
-  const router = useRouter();
-  const { id } = router.query;
+  // const router = useRoute();
+  const params = useParams();
+  const { id } = params.id;
   const [exams, setExams] = useState([]);
 
+  async function getTestsByExam() {
+    try {
+      const response1 = await fetch(
+        `http://localhost:8080/exam-mastery/exams/${params.id}/tests`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "*",
+          },
+        }
+      );
+      const tests = await response1.json();
+      console.log("tests", tests);
+      return tests;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
-    if (!id) {
+    if (!params.id) {
       return;
     } else {
-      axios
-        .get(`${process.env.API_URL}/exams/${id}/tests`)
+      getTestsByExam()
         .then((res) => {
           //test order - Listening, Reading, Writing, Speaking
-          let data = res.data;
           let flattenExam = [];
           flattenExam.push(
-            data
+            res
               .filter((item) => item.category === "Listening")
               .sort((a, b) => a.section - b.section)
           );
           flattenExam.push(
-            data
+            res
               .filter((item) => item.category === "Reading")
               .sort((a, b) => a.section - b.section)
           );
           flattenExam.push(
-            data
+            res
               .filter((item) => item.category === "Writing")
               .sort((a, b) => a.section - b.section)
           );
           flattenExam.push(
-            data
+            res
               .filter((item) => item.category === "Speaking")
               .sort((a, b) => a.section - b.section)
           );
