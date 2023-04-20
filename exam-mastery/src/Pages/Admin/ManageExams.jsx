@@ -35,7 +35,11 @@ const ManageExams = () => {
   useEffect(() => {
     getStudents().then((data) => {
       console.log("ddstu:",data);
-      setRows(data);
+      const newdata = data.map(element => {
+        return {...element,id:element._id}
+      });
+      console.log("newww",newdata)
+      setRows(newdata);
     });
   }, []);
 
@@ -151,7 +155,7 @@ EditToolbar.propTypes = {
 
   const colors = tokens(theme.palette.mode);
   const columns = [
-    { field: "id", headerName: "ID" },
+    { field: "_id", headerName: "ID" },
     {
       field: "firstName",
       headerName: "First Name",
