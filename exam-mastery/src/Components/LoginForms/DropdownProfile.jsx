@@ -17,7 +17,7 @@ const DropDownProfile=() => {
         <div className='flex flex-col dropDownProfile'>
             <ul className='flex flex-col gap-4'>
                 <p></p>
-                <Button onclick={logoutRoute}>Logout</Button>
+                <Button onClick={logoutRoute}>Logout</Button>
                 
             </ul>
         </div>
