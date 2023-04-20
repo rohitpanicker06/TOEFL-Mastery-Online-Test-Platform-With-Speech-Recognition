@@ -38,7 +38,7 @@ const TestCard = ({ exam }) => {
     >
       <CardActionArea
         component={RouterLink}
-        href={`/student/exam/${exam._id}`}
+        to={`/student/exam/${exam.id}`}
         // style={{ pointerEvents: exam.completed ? "all" : "none" }}
       >
         <CardContent>

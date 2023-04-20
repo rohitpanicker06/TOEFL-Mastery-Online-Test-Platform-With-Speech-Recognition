@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import Topbar from "./Components/Navigation/Topbar";
 import Sidebar from "./Components/Navigation/Sidebar";
 import AdminSidebar from "./Components/Navigation/AdminSidebar";
@@ -15,43 +15,38 @@ import ManageExams from "./Pages/Admin/ManageExams";
 import PracticeTestDashBoard from "./Pages/PracticeTests/PracticeTestDashBoard";
 import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import Blog from "./Pages/BlogHome/index";
-import BlogList from "./Pages/BlogList/index"
-
+import BlogList from "./Pages/BlogList/index";
+import Exam from "./Pages/Student/Exam/[_id]";
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
   const navigate = useNavigate(); // adding this line to get the navigate function
 
-
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          {/* <Sidebar isSidebar={isSidebar} /> */}
-          <AdminSidebar isSidebar={isSidebar} />
+          <Sidebar isSidebar={isSidebar} />
+          {/* <AdminSidebar isSidebar={isSidebar} /> */}
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
-               {/* {
+              {
                 <Route
                   path="/student/dashboard"
                   element={<StudentDashboard />}
                 />
-              } */}
-              {
-                <Route
-                  path="/admin/dashboard"
-                  element={<AdminDashboard />}
-                />
               }
+              {/* {<Route path="/admin/dashboard" element={<AdminDashboard />} />} */}
               {
                 <Route
                   path="/student/practice-tests"
                   element={<PracticeTestDashBoard />}
                 />
               }
+              {<Route path="/student/exam/:id" Component={Exam} />}
               {<Route path="/student/team-members" element={<TeamMembers />} />}
               {<Route path="/admin/manage-exams" element={<ManageExams />} />}
               {<Route path="/student/contact-us" element={<ContactUs />} />}
@@ -61,7 +56,7 @@ function App() {
               <Route
                 path="*"
                 element={() => {
-                  navigate('/student/blog'); // use the navigate function to redirect to the desired route
+                  navigate("/student/blog"); // use the navigate function to redirect to the desired route
                   return null;
                 }}
               />
