@@ -2,8 +2,6 @@ import React from "react";
 import { Container, Grid, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import ExamCard from "../../Components/Student/PractiseTests/ExamCard";
-import axios from "axios";
-import AOS from "aos";
 const PracticeTestDashBoard = () => {
   const [data, setData] = useState();
 
@@ -45,9 +43,6 @@ const PracticeTestDashBoard = () => {
       console.log("data", data);
       const exams = data[0].sort((a, b) => new Date(b.date) - new Date(a.date));
       const tests = data[1];
-
-      console.log("exams", exams);
-      console.log("tests", tests);
       exams.forEach((exam) => {
         exam["test"] = tests.filter((test) => test.examId === exam._id);
       });
@@ -80,7 +75,6 @@ const PracticeTestDashBoard = () => {
           exam["completed"] = true;
         }
       });
-      console.log("exams2212", exams);
       setData(exams);
     });
   }, []);

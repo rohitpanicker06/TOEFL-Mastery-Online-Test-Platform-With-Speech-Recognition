@@ -27,6 +27,6 @@ const AdminExamSchema = new Mongoose.Schema({
 //AdminSchema.virtual('id', () => this._id.toHexString())
 AdminExamSchema.set('toJSON', {virtuals: true})
 
-const AdminExam =  Mongoose.model('Manage Exams', AdminExamSchema);
+const AdminExam =  Mongoose.model('Manage_Exams', AdminExamSchema);
 
 module.exports = AdminExam;
