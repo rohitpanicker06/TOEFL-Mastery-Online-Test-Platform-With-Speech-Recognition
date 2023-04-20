@@ -18,7 +18,7 @@ const TestHistory = new Schema({
   testId: String,
   section: Number,
   examId: String,
-  score: Number,
+  score: mongoose.Schema.Types.Mixed,
   userResponse: [{ type: UserResponse }],
 });
 
