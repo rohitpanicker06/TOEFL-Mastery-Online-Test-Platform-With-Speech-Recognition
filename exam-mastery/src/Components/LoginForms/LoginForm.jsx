@@ -3,6 +3,7 @@ import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { Form, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
 import { Select, MenuItem, FormControl } from "@mui/material";
+import Session from "../../SessionManagement/Session"
 
 import {
   Box,
@@ -54,8 +55,58 @@ const LoginForm = ({ setAuth }) => {
     },
     validationSchema: LoginSchema,
     onSubmit: (values) => {
+      console.log("Trying to login");
+      const bodyData = {
+        email: values.email,
+        password: values.password,
+        role: selectedValue
+      };
+
+      fetch("http://localhost:8080/exam-mastery/login", {
+
+        method: "POST",
+
+           headers: {
+
+            "Content-Type": "application/json",
+
+           },
+
+           body: JSON.stringify(bodyData),
+
+            })
+
+            .then((response) => {
+          if (response.ok) {
+
+           console.log("Login Successfull!");
+           console.log("Navigating to dashboard");
+           Session.handleLogin(bodyData.email);
+
+            var checkREsult = selectedValue.localeCompare("Student");
+            if(checkREsult == 0){
+
+              navigate("/student/dashboard?sidebar=true")
+            }else{
+              navigate("/student/dashboard?sidebar=false")
+            }
+
+           
+            } else {
+
+            console.error("Error While logging in:", response.status);
+
+           }
+            })
+
+           .catch((error) => {
+
+        console.error("Error adding row:", error);
+
+           });
       console.log("submitting...");
       console.log(selectedValue);
+
       
     },
   });

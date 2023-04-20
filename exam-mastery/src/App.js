@@ -48,7 +48,7 @@ function App() {
         <CssBaseline />
         <div className="app">
 
-            {isSidebar ? <Sidebar /> : null}
+            {isSidebar ? <Sidebar /> : <AdminSidebar/>}
 
           {/* <AdminSidebar isSidebar={isSidebar} /> */}
           <main className="content">
