@@ -39,16 +39,25 @@ const SignupForm = ({ setAuth }) => {
       .min(2, "Too Short!")
       .max(50, "Too Long!")
       .required("Last name required"),
-      email: Yup.string()
-      .email("Email must be a valid email address").matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/, 'Invalid email format.')
+    email: Yup.string()
+      .email("Email must be a valid email address")
+      .matches(
+        /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/,
+        "Invalid email format."
+      )
       .required("Email is required"),
-    password: Yup.string().min(8, 'Password must be at least 8 characters long.')
-    .max(50, 'Password cannot be longer than 50 characters.')
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.'
-    )
-    .notOneOf(['password', '12345678'], 'Password cannot be "password" or "12345678".').required("Password is required"),
+    password: Yup.string()
+      .min(8, "Password must be at least 8 characters long.")
+      .max(50, "Password cannot be longer than 50 characters.")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character."
+      )
+      .notOneOf(
+        ["password", "12345678"],
+        'Password cannot be "password" or "12345678".'
+      )
+      .required("Password is required"),
   });
 
   const formik = useFormik({
@@ -60,49 +69,36 @@ const SignupForm = ({ setAuth }) => {
     },
     validationSchema: SignupSchema,
     onSubmit: (values) => {
-        console.log("Trying to submit");
-        const bodyData = {
-            firstName: values.firstName,
-            lastName: values.lastName,
-            email: values.email,
-            password: values.password
-          };
-        fetch("http://localhost:8080/exam-mastery/signup", {
+      console.log("Trying to submit");
+      const bodyData = {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        password: values.password,
+      };
+      fetch("http://localhost:8080/exam-mastery/signup", {
+        method: "POST",
 
-         method: "POST",
-            
-            headers: {
-            
-             "Content-Type": "application/json",
-            
-            },
-            
-            body: JSON.stringify(bodyData),
-            
-             })
-            
-             .then((response) => {
-           if (response.ok) {
-            
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify(bodyData),
+      })
+        .then((response) => {
+          if (response.ok) {
             console.log("Sign Up Successful");
-            
-           alert("row added");
-           navigate("/login");
-            
-             } else {
-            
-             console.error("Sign Up not Successful", response.status);
-            
-            }
-            
-             })
-            
-            .catch((error) => {
-            
-         console.error("Error adding row:", error);
-            
-            });
 
+            //  alert("row added");
+            navigate("/login");
+          } else {
+            console.error("Sign Up not Successful", response.status);
+          }
+        })
+
+        .catch((error) => {
+          console.error("Error adding row:", error);
+        });
     },
   });
 

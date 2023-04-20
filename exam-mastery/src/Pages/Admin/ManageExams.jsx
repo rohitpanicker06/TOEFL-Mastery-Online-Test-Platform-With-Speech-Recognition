@@ -4,26 +4,25 @@ import { tokens } from "../../theme";
 import { mockAdminData } from "../../data/mockAdminData";
 import Header from "../../Components/Header/Header";
 import { useEffect, useState } from "react";
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-import SaveIcon from '@mui/icons-material/Save';
-import CancelIcon from '@mui/icons-material/Close';
+import * as React from "react";
+import PropTypes from "prop-types";
+import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/DeleteOutlined";
+import SaveIcon from "@mui/icons-material/Save";
+import CancelIcon from "@mui/icons-material/Close";
 import {
   GridRowModes,
   DataGridPro,
   GridToolbarContainer,
   GridActionsCellItem,
-} from '@mui/x-data-grid-pro';
+} from "@mui/x-data-grid-pro";
 import {
   randomCreatedDate,
   randomTraderName,
   randomUpdatedDate,
   randomId,
-} from '@mui/x-data-grid-generator';
-
+} from "@mui/x-data-grid-generator";
 
 const ManageExams = () => {
   const theme = useTheme();
@@ -34,42 +33,41 @@ const ManageExams = () => {
 
   useEffect(() => {
     getStudents().then((data) => {
-      console.log("ddstu:",data);
-      const newdata = data.map(element => {
-        return {...element,id:element._id}
+      console.log("ddstu:", data);
+      const newdata = data.map((element) => {
+        return { ...element, id: element._id };
       });
-      console.log("newww",newdata)
+      console.log("newww", newdata);
       setRows(newdata);
     });
   }, []);
 
-  
-function EditToolbar(props) {
-  const { setRows, setRowModesModel } = props;
+  function EditToolbar(props) {
+    const { setRows, setRowModesModel } = props;
 
-  // const handleClick = () => {
-  //   const id = parseInt(rows[rows.length-1].id) + 1;
-  //   setRows((oldRows) => [...oldRows, { id, firstname: '', lastname: '', password: '', email:'', isNew: true }]);
-  //   setRowModesModel((oldModel) => ({
-  //     ...oldModel,
-  //     [id]: { mode: GridRowModes.Edit, fieldToFocus: 'firstname' },
-  //   }));
-  // };
-  // return (
+    // const handleClick = () => {
+    //   const id = parseInt(rows[rows.length-1].id) + 1;
+    //   setRows((oldRows) => [...oldRows, { id, firstname: '', lastname: '', password: '', email:'', isNew: true }]);
+    //   setRowModesModel((oldModel) => ({
+    //     ...oldModel,
+    //     [id]: { mode: GridRowModes.Edit, fieldToFocus: 'firstname' },
+    //   }));
+    // };
+    // return (
 
-  //   <GridToolbarContainer>
-  //     <Button style= {{color:"white", backgroundColor:"violet"}} startIcon={<AddIcon />} onClick={handleClick}>
-  //       CREATE STUDENT
-  //     </Button>
-  //   </GridToolbarContainer>
+    //   <GridToolbarContainer>
+    //     <Button style= {{color:"white", backgroundColor:"violet"}} startIcon={<AddIcon />} onClick={handleClick}>
+    //       CREATE STUDENT
+    //     </Button>
+    //   </GridToolbarContainer>
 
-  // );
-}
+    // );
+  }
 
-EditToolbar.propTypes = {
-  setRowModesModel: PropTypes.func.isRequired,
-  setRows: PropTypes.func.isRequired,
-};
+  EditToolbar.propTypes = {
+    setRowModesModel: PropTypes.func.isRequired,
+    setRows: PropTypes.func.isRequired,
+  };
 
   const handleRowEditStart = (params, event) => {
     event.defaultMuiPrevented = true;
@@ -91,23 +89,23 @@ EditToolbar.propTypes = {
   const handleDeleteClick = (id) => () => {
     setRows(rows.filter((row) => row.id !== id));
     fetch(`http://localhost:8080/exam-mastery/deleteStudents?id=${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        // handle the response
+        if (response.ok) {
+          console.log("Row deleted successfully!");
+          alert("row deleted");
+        } else {
+          console.error("Error deleting row:", response.status);
         }
       })
-        .then((response) => {
-          // handle the response
-          if (response.ok) {
-            console.log("Row deleted successfully!");
-            alert("row deleted");
-          } else {
-            console.error("Error deleting row:", response.status);
-          }
-        })
-        .catch((error) => {
-          console.error("Error deleting row:", error);
-        });
+      .catch((error) => {
+        console.error("Error deleting row:", error);
+      });
   };
 
   const handleCancelClick = (id) => () => {
@@ -123,9 +121,16 @@ EditToolbar.propTypes = {
   };
 
   const processRowUpdate = (newRow) => {
-    const updatedRow = { ...newRow, firstname:newRow.firstname, lastname: newRow.lastname, password:newRow.password,email:newRow.email,isNew: false };
+    const updatedRow = {
+      ...newRow,
+      firstname: newRow.firstname,
+      lastname: newRow.lastname,
+      password: newRow.password,
+      email: newRow.email,
+      isNew: false,
+    };
     setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
-    if(editClicked) {
+    if (editClicked) {
       fetch("http://localhost:8080/exam-mastery/updateStudents", {
         method: "PUT",
         headers: {
@@ -137,7 +142,7 @@ EditToolbar.propTypes = {
           // handle the response
           if (response.ok) {
             console.log("Row updated successfully!");
-            alert("row added");
+            // alert("row added");
           } else {
             console.error("Error updated row:", response.status);
           }
@@ -174,21 +179,19 @@ EditToolbar.propTypes = {
       headerName: "Password",
       flex: 1,
       editable: true,
-      
     },
     {
       field: "email",
       headerName: "Email",
       flex: 1,
       editable: true,
-      
     },
     {
-      field: 'actions',
-      type: 'actions',
-      headerName: 'Actions',
+      field: "actions",
+      type: "actions",
+      headerName: "Actions",
       width: 100,
-      cellClassName: 'actions',
+      cellClassName: "actions",
       getActions: ({ id }) => {
         const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
 
@@ -232,12 +235,12 @@ EditToolbar.propTypes = {
     <Box
       sx={{
         height: 500,
-        width: '100%',
-        '& .actions': {
-          color: 'text.secondary',
+        width: "100%",
+        "& .actions": {
+          color: "text.secondary",
         },
-        '& .textPrimary': {
-          color: 'text.primary',
+        "& .textPrimary": {
+          color: "text.primary",
         },
       }}
     >

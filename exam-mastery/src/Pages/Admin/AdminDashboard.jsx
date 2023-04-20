@@ -1,28 +1,36 @@
-import * as React from 'react';
-import { Box, Typography, Container, Button, useTheme, Grid, Link } from "@mui/material";
+import * as React from "react";
+import {
+  Box,
+  Typography,
+  Container,
+  Button,
+  useTheme,
+  Grid,
+  Link,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import PropTypes from 'prop-types';
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-import SaveIcon from '@mui/icons-material/Save';
-import CancelIcon from '@mui/icons-material/Close';
+import PropTypes from "prop-types";
+import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/DeleteOutlined";
+import SaveIcon from "@mui/icons-material/Save";
+import CancelIcon from "@mui/icons-material/Close";
 
 import {
   GridRowModes,
   DataGridPro,
   GridToolbarContainer,
   GridActionsCellItem,
-} from '@mui/x-data-grid-pro';
+} from "@mui/x-data-grid-pro";
 import {
   randomCreatedDate,
   randomTraderName,
   randomUpdatedDate,
   randomId,
-} from '@mui/x-data-grid-generator';
-import { yellow } from '@mui/material/colors';
+} from "@mui/x-data-grid-generator";
+import { yellow } from "@mui/material/colors";
 
 const AdminDashboard = () => {
   const theme = useTheme();
@@ -32,40 +40,53 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     getExams().then((data) => {
-      console.log("dd:",data);
+      console.log("dd:", data);
       setRows(data);
     });
   }, []);
 
-function EditToolbar(props) {
-  const { setRows, setRowModesModel } = props;
+  function EditToolbar(props) {
+    const { setRows, setRowModesModel } = props;
 
-  const handleClick = () => {
-    const createdAtDate = new Date();
-    const updatedAtDate = new Date();
-    const id = parseInt(rows[rows.length-1].id) + 1;
-    setRows((oldRows) => [...oldRows, { id, title: '', date: '', type: '', createdAt: createdAtDate,updatedAt:updatedAtDate, isNew: true }]);
-    setRowModesModel((oldModel) => ({
-      ...oldModel,
-      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'title' },
-    }));
+    const handleClick = () => {
+      const createdAtDate = new Date();
+      const updatedAtDate = new Date();
+      const id = parseInt(rows[rows.length - 1].id) + 1;
+      setRows((oldRows) => [
+        ...oldRows,
+        {
+          id,
+          title: "",
+          date: "",
+          type: "",
+          createdAt: createdAtDate,
+          updatedAt: updatedAtDate,
+          isNew: true,
+        },
+      ]);
+      setRowModesModel((oldModel) => ({
+        ...oldModel,
+        [id]: { mode: GridRowModes.Edit, fieldToFocus: "title" },
+      }));
+    };
+
+    return (
+      <GridToolbarContainer>
+        <Button
+          style={{ color: "white", backgroundColor: "violet" }}
+          startIcon={<AddIcon />}
+          onClick={handleClick}
+        >
+          CREATE TEST
+        </Button>
+      </GridToolbarContainer>
+    );
+  }
+
+  EditToolbar.propTypes = {
+    setRowModesModel: PropTypes.func.isRequired,
+    setRows: PropTypes.func.isRequired,
   };
-
-  return (
-
-    <GridToolbarContainer>
-      <Button style= {{color:"white", backgroundColor:"violet"}} startIcon={<AddIcon />} onClick={handleClick}>
-        CREATE TEST
-      </Button>
-    </GridToolbarContainer>
-
-  );
-}
-
-EditToolbar.propTypes = {
-  setRowModesModel: PropTypes.func.isRequired,
-  setRows: PropTypes.func.isRequired,
-};
 
   const handleRowEditStart = (params, event) => {
     event.defaultMuiPrevented = true;
@@ -87,23 +108,23 @@ EditToolbar.propTypes = {
   const handleDeleteClick = (id) => () => {
     setRows(rows.filter((row) => row.id !== id));
     fetch(`http://localhost:8080/exam-mastery/deleteTest?id=${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        // handle the response
+        if (response.ok) {
+          console.log("Row deleted successfully!");
+          alert("row deleted");
+        } else {
+          console.error("Error deleting row:", response.status);
         }
       })
-        .then((response) => {
-          // handle the response
-          if (response.ok) {
-            console.log("Row deleted successfully!");
-            alert("row deleted");
-          } else {
-            console.error("Error deleting row:", response.status);
-          }
-        })
-        .catch((error) => {
-          console.error("Error deleting row:", error);
-        });
+      .catch((error) => {
+        console.error("Error deleting row:", error);
+      });
   };
 
   const handleCancelClick = (id) => () => {
@@ -120,10 +141,23 @@ EditToolbar.propTypes = {
 
   const processRowUpdate = (newRow) => {
     const updatedAtDate = new Date();
-    const updatedRow = { ...newRow, title:newRow.title, type: newRow.type, date:newRow.date,isNew: false };
-    const updatedRowEdit = { ...newRow, title:newRow.title, type: newRow.type, date:newRow.date, updatedAt:updatedAtDate ,isNew: false };
+    const updatedRow = {
+      ...newRow,
+      title: newRow.title,
+      type: newRow.type,
+      date: newRow.date,
+      isNew: false,
+    };
+    const updatedRowEdit = {
+      ...newRow,
+      title: newRow.title,
+      type: newRow.type,
+      date: newRow.date,
+      updatedAt: updatedAtDate,
+      isNew: false,
+    };
     setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
-    if(editClicked) {
+    if (editClicked) {
       fetch("http://localhost:8080/exam-mastery/updateTest", {
         method: "PUT",
         headers: {
@@ -135,7 +169,7 @@ EditToolbar.propTypes = {
           // handle the response
           if (response.ok) {
             console.log("Row updated successfully!");
-            alert("row added");
+            // alert("row added");
           } else {
             console.error("Error updated row:", response.status);
           }
@@ -143,10 +177,9 @@ EditToolbar.propTypes = {
         .catch((error) => {
           console.error("Error updating row:", error);
         });
-        setRows(rows.map((row) => (row.id === newRow.id ? updatedRowEdit : row)));
-        return updatedRowEdit;
-    }
-    else {
+      setRows(rows.map((row) => (row.id === newRow.id ? updatedRowEdit : row)));
+      return updatedRowEdit;
+    } else {
       fetch("http://localhost:8080/exam-mastery/createTest", {
         method: "POST",
         headers: {
@@ -166,7 +199,7 @@ EditToolbar.propTypes = {
         .catch((error) => {
           console.error("Error adding row:", error);
         });
-        return updatedRow;
+      return updatedRow;
     }
   };
 
@@ -209,11 +242,11 @@ EditToolbar.propTypes = {
       editable: false,
     },
     {
-      field: 'actions',
-      type: 'actions',
-      headerName: 'Actions',
+      field: "actions",
+      type: "actions",
+      headerName: "Actions",
       width: 100,
-      cellClassName: 'actions',
+      cellClassName: "actions",
       getActions: ({ id }) => {
         const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
 
@@ -257,12 +290,12 @@ EditToolbar.propTypes = {
     <Box
       sx={{
         height: 500,
-        width: '100%',
-        '& .actions': {
-          color: 'text.secondary',
+        width: "100%",
+        "& .actions": {
+          color: "text.secondary",
         },
-        '& .textPrimary': {
-          color: 'text.primary',
+        "& .textPrimary": {
+          color: "text.primary",
         },
       }}
     >
