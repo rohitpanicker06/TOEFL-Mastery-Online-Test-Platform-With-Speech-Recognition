@@ -24,10 +24,6 @@ TOEFL MASTER is an online TOEFL MASTER test platform. The platform provides mult
 - Jatinder Bali (NUID: 001539121)
 - Rutuja Mandlik (NUID: 002191355)
 
-## Domain Model
-![Final domain diagram]
-
-![image](https://user-images.githubusercontent.com/113074747/206375077-633c45fb-8d01-4e03-8b3e-946b1ce1721c.png)
 
 ### Installation
 #### Prerequisites
