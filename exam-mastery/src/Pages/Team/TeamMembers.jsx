@@ -2,11 +2,10 @@ import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataTeam } from "../../data/mockData";
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import Header from "../../Components/Header/Header";
 import { useEffect, useState } from "react";
 
+//Displays the team history"
 var members = null;
 const TeamMembers = () => {
   const theme = useTheme();
@@ -103,24 +102,5 @@ const TeamMembers = () => {
     </Box>
   );
 };
-
-function getTeamMembers() {
-  return new Promise((resolve, reject) => {
-    const data = "";
-    const xhr = new XMLHttpRequest();
-
-    xhr.addEventListener("readystatechange", function () {
-      if (this.readyState === 4) {
-        console.log(this.responseText);
-        resolve(JSON.parse(this.responseText));
-      }
-    });
-
-    xhr.open("GET", "http://localhost:8080/exam-mastery/getTeamMembers/");
-    xhr.setRequestHeader("Content-Type", "application/json");
-
-    xhr.send(data);
-  });
-}
 
 export default TeamMembers;

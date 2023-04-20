@@ -38,6 +38,7 @@ const Sidebar = () => {
   const [selected, setSelected] = useState("Dashboard");
   const [fullname, setFullname] = useState();
 
+  //Get Fullname of user asper email
   async function getUsername() {
     const name = await fetch(
       `http://localhost:8080/exam-mastery/${email}/name`,

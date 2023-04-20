@@ -32,6 +32,7 @@ import {
 } from "@mui/x-data-grid-generator";
 import { yellow } from "@mui/material/colors";
 
+//Display Admin Related Dashbaord to view and manage exams
 const AdminDashboard = () => {
   const theme = useTheme();
   const [rows, setRows] = React.useState([]);

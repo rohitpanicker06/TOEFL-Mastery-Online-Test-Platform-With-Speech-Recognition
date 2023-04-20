@@ -162,6 +162,7 @@ Your browser does not support the audio element.
       this.props.test.category === "Listening" ||
       this.props.test.category === "Reading"
     ) {
+      //POST request to post test results in TestHhistory of the student for all sections
       axios
         .post(
           `http://localhost:8080/exam-mastery/students/${this.props.user}/testHistory`,

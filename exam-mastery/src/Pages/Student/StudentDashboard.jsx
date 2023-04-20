@@ -10,6 +10,7 @@ import SuggestedStudyMaterial from "../../Components/Student/SuggestedStudyMater
 import Avatar from "@mui/material/Avatar";
 import axios from "axios";
 
+//Displays the Student Dashboard
 const StudentDashboard = () => {
   const [userData, setUserData] = useState({});
   const [summary, setSummary] = useState({

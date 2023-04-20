@@ -10,6 +10,7 @@ import { Card, CardHeader, Box } from "@mui/material";
 //   chartLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
 // };
 
+//Displays the student progress
 const SectionWiseComparisonChart = ({
   title,
   subheader,

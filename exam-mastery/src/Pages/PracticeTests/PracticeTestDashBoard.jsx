@@ -2,11 +2,14 @@ import React from "react";
 import { Container, Grid, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import ExamCard from "../../Components/Student/PractiseTests/ExamCard";
+
+//Displays the Different exams a student can take
 const PracticeTestDashBoard = () => {
   const [data, setData] = useState();
 
   async function getExamGetTest() {
     try {
+      //GET request to get all exams
       const response1 = await fetch(
         "http://localhost:8080/exam-mastery/exams",
         {
@@ -19,7 +22,7 @@ const PracticeTestDashBoard = () => {
         }
       );
       const exams = await response1.json();
-
+      //GET request to get all tests
       const response2 = await fetch(
         "http://localhost:8080/exam-mastery/tests",
         {
