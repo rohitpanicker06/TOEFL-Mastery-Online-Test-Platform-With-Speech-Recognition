@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Topbar from "./Components/Navigation/Topbar";
 import Sidebar from "./Components/Navigation/Sidebar";
@@ -25,9 +25,7 @@ import Contact from "./Pages/LandingPage/Contact";
 import Footer from "./Pages/LandingPage/Footer";
 import Login from "./Pages/Login/Login";
 import Signup from "./Pages/Login/Signup";
-import ForgotPasswordForm from "./Pages/Login/ForgotPasswordForm";
 import "./App.css";
-import Session from "./SessionManagement/Session"
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -36,31 +34,22 @@ function App() {
   const [auth, setAuth] = useState(true);
   const navigate = useNavigate(); // adding this line to get the navigate function
   const location = useLocation();
-   
+ 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const sidebarValue = searchParams.get("sidebar");
     const adminBarValue = searchParams.get("adminBar");
     setIsSidebar(sidebarValue === "true");
     setIsAdminbar(adminBarValue === "true");
-
-    const isLoggedIn = Session.isLoggedIn();
-    if (!isLoggedIn) {
-      navigate("/");
-    }
-
   }, [location.search]);
 
-  var value = Session.isLoggedIn();
-  
 
   return (
-   
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-        
+
             {isSidebar ? <Sidebar /> : null}
             {isAdminbar ? <AdminSidebar /> : null}
 
@@ -68,20 +57,15 @@ function App() {
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
-
-            {   
+            {
                 <Route path="/login" element={<Login />} /> 
               }
 
               {
                 <Route path="/signup" element={<Signup/>} />
               }
-              {
-                <Route path="/forgotPassword/form" element={<ForgotPasswordForm/>} />
-              }
 
             {
-              
             <Route path="/"
               element={<><Home/> <About /> <Work /> <Testimonial /> <Contact /> <Footer /></>}/>
             }
@@ -113,10 +97,6 @@ function App() {
                   return null;
                 }}
               />
-
-            
-
-            
             </Routes>
           </main>
         </div>

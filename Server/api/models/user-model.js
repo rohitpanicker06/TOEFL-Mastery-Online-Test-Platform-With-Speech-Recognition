@@ -17,6 +17,7 @@ const UserSchema = new Mongoose.Schema({
  "lastName": {
  type : String,
  required: "Enter LastName"
+
  },
 
  "password" : {

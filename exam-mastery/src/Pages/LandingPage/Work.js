@@ -24,12 +24,12 @@ const Work = () => {
     backgroundImage: `url(${BackgroundImage})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
-    height: "1000px",
+    height: "900px",
+    padding: "-140px",
   };
   return (
     <div className="work-section-wrapper" style={bannerImageStyle}>
       <div className="work-section-top">
-        <p className="primary-subheading">Work</p>
         <h1 className="primary-heading">How It Works</h1>
         <p className="primary-text">
         With TOEFL Master, there is no traditional “core curriculum” that you work through like other courses, with each lesson building on the last. Rather, Magoosh gives you everything you need to study for the exam, but in more of a library type format.

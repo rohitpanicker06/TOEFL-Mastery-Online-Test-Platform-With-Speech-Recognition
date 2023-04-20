@@ -242,19 +242,19 @@ const StudentDashboard = () => {
             chartData={[
               {
                 name: "Reading",
-                data: [25, 27, 26, 28, 29],
+                data: [5, 7.5, 6, 8, 9],
               },
               {
                 name: "Listening",
-                data: [28, 26, 24, 28, 29],
+                data: [8, 6, 4, 8, 9],
               },
               {
                 name: "Writing",
-                data: [26, 24, 28, 26, 29],
+                data: [6, 4.5, 8, 6, 9],
               },
               {
                 name: "Speaking",
-                data: [25, 28, 24, 27, 26],
+                data: [5, 8, 4, 7, 6],
               },
             ]}
           />
@@ -307,7 +307,7 @@ const StudentDashboard = () => {
                 `../../assets/userprofile3.png`,
                 `../../assets/userprofile4.png`,
               ][index],
-              proficiency: 119 - index,
+              proficiency: 8.5 - index,
             }))}
           />
         </Grid>
