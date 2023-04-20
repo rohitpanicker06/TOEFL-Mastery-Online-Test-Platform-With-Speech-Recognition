@@ -68,6 +68,23 @@ const userService = {
     });
   },
 
+  async getName(req, res) {
+    email: req.params.email;
+    await userModel
+      .find({ email: req.params.email })
+      .then((data) => {
+        if (!data) {
+          res.status(404).send({ message: "Not found Test with Examid " });
+        } else {
+          console.log("data", data);
+          res.send({ name: data[0].firstName + " " + data[0].lastName });
+        }
+      })
+      .catch((err) => {
+        res.status(500).send({ message: "Error retrieving Examid=" });
+      });
+  },
+
   async send(userObj, response) {
     console.log("Hello");
     var MongoClient = require("mongodb").MongoClient;
