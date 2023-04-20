@@ -184,7 +184,7 @@ export default function ScoreBoard({ open, setOpen }) {
   };
 
   const handleRedirect = () => {
-    navigate("/student/dashboard");
+    navigate("/student/dashboard?" + localStorage.getItem("role"));
     setOpen(false);
   };
 

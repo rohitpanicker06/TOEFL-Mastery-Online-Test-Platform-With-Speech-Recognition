@@ -135,7 +135,7 @@ const Sidebar = () => {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
-              to="/student/dashboard"
+              to={"/student/dashboard?"+ localStorage.getItem("role")}
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -150,14 +150,14 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Practice Tests"
-              to="/student/practice-tests"
+              to={"/student/practice-tests?" + localStorage.getItem("role")}
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Team Members"
-              to="/student/team-members"
+              to={"/student/team-members?" + localStorage.getItem("role")}
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -171,21 +171,21 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Blog"
-              to="/student/blog"
+              to={"/student/blog?" + localStorage.getItem("role")}
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Contact Us"
-              to="/student/contact-us"
+              to={"/student/contact-us?" + localStorage.getItem("role")}
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="FAQ Page"
-              to="/student/faq"
+              to={"/student/faq?" + localStorage.getItem("role")}
               icon={<HelpOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

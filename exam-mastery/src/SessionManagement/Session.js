@@ -1,10 +1,16 @@
 class Session {
-    static handleLogin = (email) => {
+    static handleLogin = (username, email, role) => {
+      console.log("received");
+      console.log(username, email, role);
       sessionStorage.setItem("loggedIn", true);
-      sessionStorage.setItem("loggedInUser", email);
+      sessionStorage.setItem("loggedInUser", username);
+      sessionStorage.setItem("loggedInUserEmail", email);
+      sessionStorage.setItem("role", role);
       sessionStorage.setItem("expirationTime", new Date().getTime() + 1 * 60 * 1000);
       console.log(sessionStorage.getItem("loggedIn"));
       console.log(sessionStorage.getItem("loggedInUser"));
+      console.log(sessionStorage.getItem("loggedInUserEmail"));
+      console.log(sessionStorage.getItem("role", role));
     };
   
     static handleLogout = () => {

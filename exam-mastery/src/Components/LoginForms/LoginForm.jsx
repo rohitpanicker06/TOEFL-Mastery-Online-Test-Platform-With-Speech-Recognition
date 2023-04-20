@@ -74,10 +74,13 @@ const LoginForm = ({ setAuth }) => {
             console.log("Navigating to dashboard");
             Session.handleLogin(bodyData.email);
             localStorage.setItem("email", bodyData.email); //Setting localstorage for Saving email during login
+            
             var checkREsult = selectedValue.localeCompare("Student");
             if (checkREsult == 0) {
+              localStorage.setItem("role", "sidebar=true");
               navigate("/student/dashboard?sidebar=true");
             } else {
+              localStorage.setItem("role", "adminBar=true");
               navigate("/admin/dashboard?adminBar=true");
             }
           } else {
