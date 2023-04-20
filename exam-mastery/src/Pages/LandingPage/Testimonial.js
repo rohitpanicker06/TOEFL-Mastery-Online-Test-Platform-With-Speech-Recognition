@@ -3,21 +3,34 @@ import ProfilePic from "../../Assets/john-doe-image.png";
 import { AiFillStar } from "react-icons/ai";
 
 const Testimonial = () => {
+
   return (
     <div className="work-section-wrapper">
       <div className="work-section-top">
         <p className="primary-subheading">Testimonial</p>
         <h1 className="primary-heading">What They Are Saying</h1>
         <p className="primary-text">
-          Lorem ipsum dolor sit amet consectetur. Non tincidunt magna non et
-          elit. Dolor turpis molestie dui magnis facilisis at fringilla quam.
+          THIS IS WHY WE DO, WHAT WE DO !
         </p>
       </div>
       <div className="testimonial-section-bottom">
         <img src={ProfilePic} alt="" />
         <p>
-          Lorem ipsum dolor sit amet consectetur. Non tincidunt magna non et
-          elit. Dolor turpis molestie dui magnis facilisis at fringilla quam.
+        "TOEFL Master seemed to be by far the best option: a program I could use whenever I liked, following my own schedule."
+        </p>
+        <div className="testimonials-stars-container" >
+          <AiFillStar />
+          <AiFillStar />
+          <AiFillStar />
+          <AiFillStar />
+          <AiFillStar />
+        </div>
+        <h2>Sarthak Khanna</h2>
+      </div>
+      <div className="testimonial-section-bottom">
+        <img src={`../../assets/girl.png`} alt="" />
+        <p>
+        "TOEFL Master is what you need if studying for the exam. Will give you a better understanding of the overall feel of the test which is very important. It has useful practice tests."
         </p>
         <div className="testimonials-stars-container">
           <AiFillStar />
@@ -26,7 +39,7 @@ const Testimonial = () => {
           <AiFillStar />
           <AiFillStar />
         </div>
-        <h2>John Doe</h2>
+        <h2>Manvi Kummar</h2>
       </div>
     </div>
   );
