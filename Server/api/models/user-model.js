@@ -1,11 +1,12 @@
+const { default: mongoose } = require('mongoose');
 const Mongoose = require('../app.js');
 
 // created table Schema for todo 
 const UserSchema = new Mongoose.Schema({
     "id": {
-        type : String,
-        required: true
-     },
+        type : mongoose.Schema.Types.ObjectId,
+        required: false
+    },
     "firstName": {
         type : String,
         required: "Enter First name"
