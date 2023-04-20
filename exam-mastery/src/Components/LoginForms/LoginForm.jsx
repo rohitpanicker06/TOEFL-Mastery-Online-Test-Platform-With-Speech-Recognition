@@ -75,6 +75,7 @@ const LoginForm = ({ setAuth }) => {
       })
         .then((response) => {
           if (response.ok) {
+            console.log(response);
             console.log("Login Successfull!");
             console.log("Navigating to dashboard");
             Session.handleLogin(bodyData.email);
@@ -89,7 +90,8 @@ const LoginForm = ({ setAuth }) => {
               navigate("/admin/dashboard?adminBar=true");
             }
           } else {
-            console.error("Error While logging in:", response.status);
+            alert("Invalid Password or Username");
+            
           }
         })
 

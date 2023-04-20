@@ -84,14 +84,14 @@ const SignupForm = ({ setAuth }) => {
              .then((response) => {
            if (response.ok) {
             
-            console.log("Row added successfully!");
+            console.log("Sign Up Successful");
             
            alert("row added");
            navigate("/login");
             
              } else {
             
-             console.error("Error adding row:", response.status);
+             console.error("Sign Up not Successful", response.status);
             
             }
             

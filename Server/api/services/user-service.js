@@ -36,13 +36,16 @@ const userService = {
 
   //function to login new user
   async login(userObj, response) {
+    console.log("inside login");
     userModel.findOne({ email: userObj.email }, (err, data) => {
       if (err) {
         response.json({ Status: "Failed", msg: err });
       } else {
         // if the Login ID and Password doesn't match
         if (data) {
-          bcrypt.compare(userObj.password, data.password, (err, result) => {
+            console.log("Data mil gaya hai");
+          var result = bcrypt.compareSync(userObj.password, data.password);
+            console.log("inside compareSync");
             if (result) {
               jwt.sign(
                 { data },
@@ -57,12 +60,14 @@ const userService = {
                 }
               );
             } else {
-              response.json({
+              response.status(401).json({
                 Status: "Failed",
                 msg: "Invalid username or password",
               });
             }
-          });
+          
+
+          console.log("Password is wrong")
         }
       }
     });
