@@ -3,7 +3,7 @@ const Mongoose = require('../app.js');
 
 const UserSchema = new Mongoose.Schema({
 "id":{
-    type : mongoose.Schema.Types.ObjectId,
+    type : Mongoose.Schema.Types.ObjectId,
     required: false
 },
 
