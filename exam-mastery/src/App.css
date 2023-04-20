@@ -156,11 +156,15 @@ nav {
   background-color: #e48f0f;
 }
 .about-section-container {
-  margin-top: 20rem;
+  margin-top: 5rem;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.work-section-wrapper {
+  margin-top: 5rem !important;
+  padding : 20px;
 }
 .about-background-image-container {
   position: absolute;
@@ -214,6 +218,7 @@ nav {
   justify-content: center;
   flex-direction: column;
   margin: 6rem 0rem;
+  padding-top: -20px;
 }
 .contact-form-container {
   background-color: white;
@@ -268,6 +273,14 @@ nav {
   color: #4c4c4c;
   cursor: pointer;
 }
+.footer-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  margin-top: -40px;
+}
+
 .testimonial-section-bottom {
   margin-top: 2rem;
   background-color: white;
@@ -299,7 +312,10 @@ nav {
   margin-top: 1.5rem;
 }
 .work-section-wrapper {
-  margin-top: 15rem;
+  margin-top: 30px;
+  padding-left: 20px;
+  padding-top: 30px;
+  margin-top: 30px;
 }
 .work-section-top p {
   text-align: center;
@@ -376,8 +392,14 @@ nav {
     align-items: center;
     justify-content: center;
   }
+  
   .about-section-container {
     flex-direction: column;
+  }
+  .about-section-wrapper {
+    margin-top: 30px;
+    padding-left: 20px;
+
   }
   .home-image-section,
   .about-section-image-container {
@@ -426,7 +448,9 @@ nav {
   }
   .work-section-wrapper {
     margin-top: 5rem !important;
+    padding : 20px;
   }
+
   .work-section-bottom {
     margin-top: 1rem !important;
   }

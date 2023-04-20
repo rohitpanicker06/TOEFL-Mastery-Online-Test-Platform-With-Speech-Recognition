@@ -53,7 +53,7 @@ function Item({ item }) {
       <Typography variant="caption" sx={{ pr: 3, flexShrink: 0 }}>
         <Chip
           label={"Scores " + proficiency}
-          color={proficiency < 80 ? "warning" : "success"}
+          color={proficiency < 8.5 ? "warning" : "success"}
         />
       </Typography>
     </Stack>

@@ -15,6 +15,7 @@ const Home = () => {
     backgroundSize: "cover",
     backgroundPosition: "center",
     height: "800px",
+    padding: "80px",
   };
   return (
     
