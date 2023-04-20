@@ -30,11 +30,17 @@ router.route("/getTeamMembers").get(memberController.send);
 
 router.route("/getExams").get(adminController.send);
 
+router.route("/getStudents").get(adminController.sendStudents);
+
 router.route("/createExam").post(adminController.createExam);
 
 router.route("/updateExam").put(adminController.updateExam);
 
 router.route("/deleteExam").delete(adminController.deleteExam);
+
+router.route("/updateStudents").put(adminController.updateStudents);
+
+router.route("/deleteStudents").delete(adminController.deleteStudents);
 
 router.route("/getTests").get(adminController.sendTests);
 

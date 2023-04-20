@@ -2,21 +2,25 @@ const Mongoose = require('../app.js');
 
 // created table Schema for todo 
 const UserSchema = new Mongoose.Schema({
-    "username": {
+    "id": {
         type : String,
-        required: "Enter user name"
+        required: true
+     },
+    "firstName": {
+        type : String,
+        required: "Enter First name"
     },
-    "email": {
+    "lastName": {
         type : String,
-        required: "Enter Email"
+        required: "Enter LastName"
     },
     "password" : {
         type : String,
         required: "Enter Password"
     },
-    "created_date": {
-        type: Date,
-        default: Date.now()
+    "email": {
+        type: String,
+        default: "Enter emails"
     },
 },
 {
@@ -24,7 +28,7 @@ const UserSchema = new Mongoose.Schema({
 }
 )
 
-UserSchema.virtual('id', () => this._id.toHexString())
+//UserSchema.virtual('id', () => this._id.toHexString())
 UserSchema.set('toJSON', {virtuals: true})
 
 const User =  Mongoose.model('Users', UserSchema);
