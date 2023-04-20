@@ -88,7 +88,7 @@ const LoginForm = ({ setAuth }) => {
 
               navigate("/student/dashboard?sidebar=true")
             }else{
-              navigate("/student/dashboard?sidebar=false")
+              navigate("/admin/dashboard?adminBar=true")
             }
 
            

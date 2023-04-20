@@ -76,7 +76,7 @@ function App() {
                   element={<StudentDashboard />}
                 />
               }
-              {/* {<Route path="/admin/dashboard" element={<AdminDashboard />} />} */}
+              {<Route path="/admin/dashboard" element={<AdminDashboard />} />}
               {
                 <Route
                   path="/student/practice-tests"
