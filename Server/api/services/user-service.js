@@ -6,6 +6,8 @@ const bcrypt = require('bcrypt');
 const userService = {
     // function to resgister new user
     async AddUser(userObj, response) {
+        console.log("Add user request receieved");
+        console.log(userObj);
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(userObj.password, saltRounds);
         userObj.password = hashedPassword;
@@ -45,11 +47,11 @@ async login(userObj, response) {
 async send(userObj, response) {
     console.log("Hello");
     var MongoClient = require('mongodb').MongoClient;
-    var url = "mongodb://0.0.0.0:27017";
+    var url = "mongodb+srv://mandlikr:%40Rutuja11@cluster0.vgnobys.mongodb.net";
     
     MongoClient.connect(url, function(err, db) {
       if (err) throw err;
-      var dbo = db.db("quizitdb");
+      var dbo = db.db("exam_mastery");
       dbo.collection("Team Members").findOne({}, function(err, result) {
         if (err) throw err;
         var jsonArray = result.teamAuthors;

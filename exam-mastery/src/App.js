@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import Topbar from "./Components/Navigation/Topbar";
 import Sidebar from "./Components/Navigation/Sidebar";
@@ -33,9 +33,17 @@ import Signup from "./Pages/Login/Signup";
 
 function App() {
   const [theme, colorMode] = useMode();
-  const [isSidebar, setIsSidebar] = useState(true);
+  const [isSidebar, setIsSidebar] = useState(false);
+  const [isAdminbar, setIsAdminbar] = useState(false);
   const [auth, setAuth] = useState(true);
   const navigate = useNavigate(); // adding this line to get the navigate function
+  const location = useLocation();
+ 
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const sidebarValue = searchParams.get("sidebar");
+    setIsSidebar(sidebarValue === "true");
+  }, [location.search]);
 
 
   return (
@@ -46,7 +54,7 @@ function App() {
         
         
         
-          {/* <Sidebar isSidebar={isSidebar} /> */}
+        {isSidebar ? <Sidebar /> : null}
           {/* <AdminSidebar isSidebar={isSidebar} /> */}
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />

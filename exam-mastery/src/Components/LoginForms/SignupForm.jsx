@@ -53,11 +53,50 @@ const SignupForm = ({ setAuth }) => {
       password: "",
     },
     validationSchema: SignupSchema,
-    onSubmit: () => {
-      setTimeout(() => {
-        setAuth(true);
-        navigate("/", { replace: true });
-      }, 2000);
+    onSubmit: (values) => {
+        console.log("Trying to submit");
+        const bodyData = {
+            firstName: values.firstName,
+            lastName: values.lastName,
+            email: values.email,
+            password: values.password
+          };
+        fetch("http://localhost:8080/exam-mastery/signup", {
+
+         method: "POST",
+            
+            headers: {
+            
+             "Content-Type": "application/json",
+            
+            },
+            
+            body: JSON.stringify(bodyData),
+            
+             })
+            
+             .then((response) => {
+           if (response.ok) {
+            
+            console.log("Row added successfully!");
+            
+           alert("row added");
+           navigate("/login");
+            
+             } else {
+            
+             console.error("Error adding row:", response.status);
+            
+            }
+            
+             })
+            
+            .catch((error) => {
+            
+         console.error("Error adding row:", error);
+            
+            });
+
     },
   });
 

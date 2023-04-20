@@ -125,7 +125,7 @@ function getTeamMembers() {
       }
     });
 
-    xhr.open("GET", "http://localhost:3000/getTeamMembers/");
+    xhr.open("GET", "http://localhost:8080/exam-mastery/getTeamMembers/");
     xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.send(data);

@@ -4,6 +4,7 @@ import { Container, Typography, Link, Box, Divider } from "@mui/material";
 import styled from "@emotion/styled";
 import LoginForm from "../../Components/LoginForms/LoginForm";
 import SocialAuth from "../../Components/LoginForms/SocialAuth";
+import Session from "../../SessionManagement/Session"
 
 import { motion } from "framer-motion";
 
@@ -68,7 +69,7 @@ const Login = ({ setAuth }) => {
             </Typography>
           </Divider>
 
-          <LoginForm />
+          <LoginForm/>
 
           <Typography
             component={motion.p}

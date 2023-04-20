@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { Form, FormikProvider, useFormik } from "formik";
+import Session from "../../SessionManagement/Session"
+
 import * as Yup from "yup";
 
 import {
@@ -50,8 +52,46 @@ const LoginForm = ({ setAuth }) => {
     },
     validationSchema: LoginSchema,
     onSubmit: (values) => {
-      console.log("submitting...");
-      
+      console.log("Trying to login");
+      const bodyData = {
+        email: values.email,
+        password: values.password
+      };
+
+      fetch("http://localhost:8080/exam-mastery/login", {
+
+        method: "POST",
+           
+           headers: {
+           
+            "Content-Type": "application/json",
+           
+           },
+           
+           body: JSON.stringify(bodyData),
+           
+            })
+           
+            .then((response) => {
+          if (response.ok) {
+           
+           console.log("Login Successfull!");
+           console.log("Navigating to dashboard");
+           Session.handleLogin(bodyData.email);
+
+           navigate("/student/dashboard?sidebar=true");
+            } else {
+           
+            console.error("Error While logging in:", response.status);
+           
+           }
+            })
+           
+           .catch((error) => {
+           
+        console.error("Error adding row:", error);
+           
+           });
     },
   });
 
