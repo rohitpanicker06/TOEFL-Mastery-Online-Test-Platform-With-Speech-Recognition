@@ -106,7 +106,6 @@ const LoginForm = ({ setAuth }) => {
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
     formik;
   const options = [
-    { value: "option1", label: "" },
     { value: "Student", label: "Student" },
     { value: "Admin", label: "Admin" },
   ];

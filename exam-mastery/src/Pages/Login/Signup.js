@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 
 //////////////////////////////////
 const RootStyle = styled("div")({
-  background: "rgb(249, 250, 251)",
+  background: "black",
   height: "100vh",
   display: "grid",
   placeItems: "center",
@@ -55,7 +55,7 @@ const Signup = ({ setAuth }) => {
           <HeadingStyle component={motion.div} {...fadeInUp}>
            
 
-            <Typography sx={{ color: "text.secondary", mb: 5 }}>
+            <Typography sx={{ color: "text.secondary", mb: 2 }} fontSize={30} >
               Enter your details below.
             </Typography>
           </HeadingStyle>
