@@ -6,13 +6,6 @@ TOEFL MASTER is an online TOEFL MASTER test platform. The platform provides mult
 #### Admin Users
 - Admin can log in to the platform using the admin credentials
 - Admin can CRUD questions
-- Admin can CRUD moderators
-- Admin can CRUD user profiles
-
-#### Moderators
-- Moderator can log in to the platform using the moderator credentials
-- Moderator can CRUD questions
-- Moderator can update user profile
 
 #### Registered Users (Students)
 - Users can log in using their credentials to enter the platform 
@@ -22,7 +15,7 @@ TOEFL MASTER is an online TOEFL MASTER test platform. The platform provides mult
 - Users have access to the dashboard to view their progress
 - Users can send scores to different social platforms  
 - Users will be able to view browser notifications for new questions and promotional activities
-- Users can sign up for additional rewards (study material via email)
+
 
 ## Team Members
 - Shweta Bulchandani (NUID: 002769540)
@@ -56,9 +49,6 @@ TOEFL MASTER is an online TOEFL MASTER test platform. The platform provides mult
 - Node.js
 - Express
 - MongoDB
-- Auth0
-- SendGrid
-- Twilio
 - React Material UI
 - TypeScript
 
@@ -80,9 +70,8 @@ TOEFL MASTER is an online TOEFL MASTER test platform. The platform provides mult
 │   ├── utils - All the utility functions
 │   ├── .env.local - Environment variables
 │   ├── .gitignore - Git ignore file
-│   ├── next.config.js - NextJS configuration file
+│   ├── react.config.js - ReactJS configuration file
 │   ├── package.json - NPM package file
-│   ├── tsconfig.json - TypeScript configuration file
 │   └── yarn.lock - Yarn lock file
 ├── server - The backend application
 │   ├── server.js - Entry point of the application
