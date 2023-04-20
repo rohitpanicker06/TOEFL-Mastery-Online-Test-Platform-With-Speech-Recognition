@@ -215,7 +215,7 @@ const LoginForm = ({ setAuth }) => {
               <Link
                 component={RouterLink}
                 variant="subtitle2"
-                to="#"
+                to="/forgotPassword/form"
                 underline="hover"
               >
                 Forgot password?

@@ -25,6 +25,7 @@ import Contact from "./Pages/LandingPage/Contact";
 import Footer from "./Pages/LandingPage/Footer";
 import Login from "./Pages/Login/Login";
 import Signup from "./Pages/Login/Signup";
+import ForgotPasswordForm from "./Pages/Login/ForgotPasswordForm";
 import "./App.css";
 
 function App() {
@@ -64,6 +65,9 @@ function App() {
               {
                 <Route path="/signup" element={<Signup/>} />
               }
+              {
+                <Route path="/forgotPassword/form" element={<ForgotPasswordForm/>} />
+              }
 
             {
             <Route path="/"
@@ -76,7 +80,7 @@ function App() {
                   element={<StudentDashboard />}
                 />
               }
-              {/* {<Route path="/admin/dashboard" element={<AdminDashboard />} />} */}
+              {<Route path="/admin/dashboard" element={<AdminDashboard />} />}
               {
                 <Route
                   path="/student/practice-tests"

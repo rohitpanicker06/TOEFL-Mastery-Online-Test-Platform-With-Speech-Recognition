@@ -60,12 +60,11 @@ const Login = ({ setAuth }) => {
           </HeadingStyle>
 
           <Box component={motion.div} {...fadeInUp}>
-            <SocialAuth />
+            {/* <SocialAuth /> */}
           </Box>
 
           <Divider sx={{ my: 3 }} component={motion.div} {...fadeInUp}>
             <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              OR
             </Typography>
           </Divider>
 

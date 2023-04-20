@@ -1,27 +1,28 @@
 const nodemailer = require('nodemailer')
 
-
-
 exports.send = (req, res) => {
 
     var otp = generateOTP();
     const obj = req.body
-    console.log(obj);
+    console.log("boddy:",obj);
    
 
 let transporter = nodemailer.createTransport({
-    service:"gmail",
+    //service:"gmail",
+    host: "smtp-relay.sendinblue.com",
+    port: 587,
     auth:{
-        user:"rohit.panicker16@vit.edu",
-        pass:"*********"
+        user:"mayurkhandetod@gmail.com",
+        pass:"fyLnIBGVpdh9JY4W"
     },
     tls:{
         rejectUnauthorized: false,
+        ciphers: "SSLv3"
     },
 })
 
 transporter.sendMail({
-    from:"rohit.panicker16@vit.edu",
+    from:"mayurkhandetod@gmail.com",
     to: obj.email,
     subject:"OTP: Verification Code",
     text:"Welcome "+ obj.email+ " Your OTP is : "+otp+"   "
