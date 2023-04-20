@@ -42,6 +42,12 @@ function App() {
     const adminBarValue = searchParams.get("adminBar");
     setIsSidebar(sidebarValue === "true");
     setIsAdminbar(adminBarValue === "true");
+
+    const isLoggedIn = Session.isLoggedIn();
+    if (!isLoggedIn) {
+      navigate("/");
+    }
+
   }, [location.search]);
 
   var value = Session.isLoggedIn();
