@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Topbar from "./Components/Navigation/Topbar";
 import Sidebar from "./Components/Navigation/Sidebar";
@@ -17,22 +17,57 @@ import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import Blog from "./Pages/BlogHome/index";
 import BlogList from "./Pages/BlogList/index";
 import Exam from "./Pages/Student/Exam/[_id]";
+import Home from "./Pages/LandingPage/Home";
+import About from "./Pages/LandingPage/About";
+import Work from "./Pages/LandingPage/Work";
+import Testimonial from "./Pages/LandingPage/Testimonial";
+import Contact from "./Pages/LandingPage/Contact";
+import Footer from "./Pages/LandingPage/Footer";
+import Navbar from "./Pages/LandingPage/Navbar";
+import Login from "./Pages/Login/Login";
+import Signup from "./Pages/Login/Signup";
+import "./App.css";
 
 function App() {
   const [theme, colorMode] = useMode();
-  const [isSidebar, setIsSidebar] = useState(true);
+  const [isSidebar, setIsSidebar] = useState(false);
+  const [isAdminbar, setIsAdminbar] = useState(false);
+  const [auth, setAuth] = useState(true);
   const navigate = useNavigate(); // adding this line to get the navigate function
+  const location = useLocation();
+ 
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const sidebarValue = searchParams.get("sidebar");
+    setIsSidebar(sidebarValue === "true");
+  }, [location.search]);
+
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          <Sidebar isSidebar={isSidebar} />
+
+            {isSidebar ? <Sidebar /> : null}
+
           {/* <AdminSidebar isSidebar={isSidebar} /> */}
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
+            {
+                <Route path="/login" element={<Login />} /> 
+              }
+
+              {
+                <Route path="/signup" element={<Signup/>} />
+              }
+
+            {
+            <Route path="/"
+              element={<><Home/> <About /> <Work /> <Testimonial /> <Contact /> <Footer /></>}/>
+            }
+
               {
                 <Route
                   path="/student/dashboard"
