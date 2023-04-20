@@ -36,8 +36,8 @@ async deleteExam(examObj, res) {
 },
 
 async editStudents(examObj, res) {
-  const { id,firstName,lastName,password,email} = examObj;
-  const result = await UserModel.findOneAndUpdate({id }, {firstName,lastName,password,email},{ runValidators: true});
+  const { _id,firstName,lastName,password,email} = examObj;
+  const result = await UserModel.findOneAndUpdate({_id }, {firstName,lastName,password,email},{ runValidators: true});
   if (!result) {
       res.status(404).json({ message: 'Student ID not found' });
     } else {
@@ -46,7 +46,7 @@ async editStudents(examObj, res) {
 },
 async deleteStudents(examObj, res) {
   const { id } = examObj.query;
-  const result = await UserModel.findOneAndDelete({id },{ runValidators: true});
+  const result = await UserModel.findOneAndDelete({_id:id },{ runValidators: true});
   if (!result) {
       res.status(404).json({ message: 'Student ID not found' });
     } else {

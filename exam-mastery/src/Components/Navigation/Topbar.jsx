@@ -6,11 +6,14 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import DropDownProfile from "../LoginForms/DropdownProfile";
+import {useState} from "react";
 
 const Topbar = () => {
   const theme = useTheme();
-  //   const colors = tokens(theme.palette.mode);
+  //   const colorss = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
+  const [openProfile, setOpenProfile] = useState(false);
 
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
@@ -25,8 +28,12 @@ const Topbar = () => {
             <LightModeOutlinedIcon />
           )}
         </IconButton>
-        <IconButton>
-          <PersonOutlinedIcon />
+      
+        <IconButton onClick={() => setOpenProfile(
+          (prev)=> !prev)}>
+          <PersonOutlinedIcon/>
+          {openProfile && <DropDownProfile />
+          }
         </IconButton>
       </Box>
     </Box>

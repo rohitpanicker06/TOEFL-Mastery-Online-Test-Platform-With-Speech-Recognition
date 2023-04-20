@@ -38,7 +38,9 @@ function App() {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const sidebarValue = searchParams.get("sidebar");
+    const adminBarValue = searchParams.get("adminBar");
     setIsSidebar(sidebarValue === "true");
+    setIsAdminbar(adminBarValue === "true");
   }, [location.search]);
 
 
@@ -49,6 +51,7 @@ function App() {
         <div className="app">
 
             {isSidebar ? <Sidebar /> : null}
+            {isAdminbar ? <AdminSidebar /> : null}
 
           {/* <AdminSidebar isSidebar={isSidebar} /> */}
           <main className="content">
