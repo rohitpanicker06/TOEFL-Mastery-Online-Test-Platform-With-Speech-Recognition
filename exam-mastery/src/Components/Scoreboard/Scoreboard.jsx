@@ -44,7 +44,6 @@ function getComponent(category) {
 
 export default function ScoreBoard({ open, setOpen }) {
   //   const { user } = useUser();
-  const { user } = "mandlikrutuja11@gmail.com";
   const params = useParams();
   const { id } = params.id;
   const Transition = React.forwardRef(function Transition(props, ref) {
@@ -52,11 +51,12 @@ export default function ScoreBoard({ open, setOpen }) {
   });
   const navigate = useNavigate();
   const [scores, setScores] = useState([]);
+  const [user, setUser] = useState(localStorage.getItem("email"));
   //let testID = 2;
   //const url = `${process.env.API_URL}/score?testId="${testID}"`;
 
   useEffect(() => {
-    console.log("user", params.id);
+    console.log("id", params.id);
     if (!params.id) {
       return;
     } else {
@@ -71,9 +71,7 @@ export default function ScoreBoard({ open, setOpen }) {
    */
   const getCurrentScore = (id) => {
     axios
-      .get(
-        `http://localhost:8080/exam-mastery/students/mandlikrutuja11@gmail.com/testHistory`
-      )
+      .get(`http://localhost:8080/exam-mastery/students/${user}/testHistory`)
       .then((response) => {
         console.log("Test Data", response);
         const userData = response.data[0].testHistory;
@@ -86,10 +84,8 @@ export default function ScoreBoard({ open, setOpen }) {
         let speaking = 8;
         let writingCount = 3;
         let writing = 9;
-        console.log("userData", userData);
         userData.forEach((userTest) => {
           if (userTest.examId == id) {
-            console.log("userTest.score", userTest.score);
             if (userTest.testType === "Listening") {
               listening += userTest.score;
               listeningCount++;
@@ -107,10 +103,6 @@ export default function ScoreBoard({ open, setOpen }) {
               readingCount++;
             }
           }
-          console.log("reading", reading);
-          console.log("speaking", speaking);
-          console.log("listening", listening);
-          console.log("writing", writing);
           if (reading > 0) {
             reading = Math.round((reading / readingCount) * 2) / 2;
             if (reading < 4.5) {
@@ -192,7 +184,7 @@ export default function ScoreBoard({ open, setOpen }) {
   };
 
   const handleRedirect = () => {
-    navigate("/student/dashboard");
+    navigate("/student/dashboard?" + localStorage.getItem("role"));
     setOpen(false);
   };
 

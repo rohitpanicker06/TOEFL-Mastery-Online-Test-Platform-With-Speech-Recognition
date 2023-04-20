@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -11,7 +11,6 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -34,8 +33,31 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [email, setEmail] = useState(localStorage.getItem("email"));
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const [fullname, setFullname] = useState();
+
+  async function getUsername() {
+    const name = await fetch(
+      `http://localhost:8080/exam-mastery/${email}/name`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": "*",
+        },
+      }
+    );
+    return await name.json();
+  }
+
+  useEffect(() => {
+    getUsername().then((data) => {
+      setFullname(data.name);
+    });
+  }, []);
 
   return (
     <Box
@@ -75,9 +97,7 @@ const Sidebar = () => {
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h3" color={colors.grey[100]}>
-                  STUDENT
-                </Typography>
+                <Typography variant="h3" color={colors.grey[100]}></Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
                 </IconButton>
@@ -103,7 +123,7 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Tiger Shroff
+                  {fullname}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
                   Aspiring TOEFL Master
@@ -115,7 +135,7 @@ const Sidebar = () => {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
-              to="/student/dashboard"
+              to={"/student/dashboard?"+ localStorage.getItem("role")}
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -130,14 +150,14 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Practice Tests"
-              to="/student/practice-tests"
+              to={"/student/practice-tests?" + localStorage.getItem("role")}
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Team Members"
-              to="/student/team-members"
+              to={"/student/team-members?" + localStorage.getItem("role")}
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -151,21 +171,21 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Blog"
-              to="/student/blog"
+              to={"/student/blog?" + localStorage.getItem("role")}
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Contact Us"
-              to="/student/contact-us"
+              to={"/student/contact-us?" + localStorage.getItem("role")}
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="FAQ Page"
-              to="/student/faq"
+              to={"/student/faq?" + localStorage.getItem("role")}
               icon={<HelpOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

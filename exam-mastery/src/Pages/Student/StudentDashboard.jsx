@@ -8,6 +8,7 @@ import Leaderboard from "../../Components/Student/Leaderboard";
 import Iconify from "../../Components/Iconify/Iconify";
 import SuggestedStudyMaterial from "../../Components/Student/SuggestedStudyMaterial";
 import Avatar from "@mui/material/Avatar";
+import axios from "axios";
 
 const StudentDashboard = () => {
   const [userData, setUserData] = useState({});
@@ -18,12 +19,149 @@ const StudentDashboard = () => {
     speaking: 0,
   });
   const [timeline, setTimeline] = useState([]);
+  const [email, setEmail] = useState(localStorage.getItem("email"));
+  const [fullname, setFullname] = useState();
+
+  async function getUsername() {
+    const name = await fetch(
+      `http://localhost:8080/exam-mastery/${email}/name`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": "*",
+        },
+      }
+    );
+    return await name.json();
+  }
+
+  async function getexamhistory() {
+    const data = await fetch(
+      `http://localhost:8080/exam-mastery/students/${email}/testHistory`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": "*",
+        },
+      }
+    );
+    return await data.json();
+  }
+
+  useEffect(() => {
+    getUsername().then((data) => {
+      setFullname(data.name);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (email) {
+      getexamhistory().then((user) => {
+        console.log("user", user[0]);
+        setUserData(user.data);
+        user[0].testHistory.forEach((test) => {
+          if (test.testType === "Reading")
+            setSummary((prev) => ({
+              ...prev,
+              reading: prev.reading + test.score,
+            }));
+          if (test.testType === "Listening")
+            setSummary((prev) => ({
+              ...prev,
+              listening: prev.listening + test.score,
+            }));
+          if (test.testType === "Writing")
+            setSummary((prev) => ({
+              ...prev,
+              writing: prev.writing + test.score,
+            }));
+          if (test.testType === "Speaking")
+            setSummary((prev) => ({
+              ...prev,
+              speaking: prev.speaking + test.score,
+            }));
+        });
+        //average the sores
+        setSummary((prev) => {
+          const readingTests = user[0].testHistory.filter(
+            (test) => test.testType === "Reading"
+          ).length
+            ? user[0].testHistory.filter((test) => test.testType === "Reading")
+                .length
+            : 0;
+          const listeningTests = user[0].testHistory.filter(
+            (test) => test.testType === "Listening"
+          ).length
+            ? user[0].testHistory.filter(
+                (test) => test.testType === "Listening"
+              ).length
+            : 0;
+          const writingTests = user[0].testHistory.filter(
+            (test) => test.testType === "Writing"
+          ).length
+            ? user[0].testHistory.filter((test) => test.testType === "Writing")
+                .length
+            : 0;
+          const speakingTests = user[0].testHistory.filter(
+            (test) => test.testType === "Speaking"
+          ).length
+            ? user[0].testHistory.filter((test) => test.testType === "Speaking")
+                .length
+            : 0;
+          return {
+            reading: Math.round(readingTests * 2) / 2,
+            listening: Math.round(listeningTests * 2) / 2,
+            writing: Math.round(writingTests * 2) / 2,
+            speaking: Math.round(speakingTests * 2) / 2,
+          };
+        });
+
+        //timeline
+        const examIds = [
+          ...new Set(user[0].testHistory.map((test) => test.examId)),
+        ];
+
+        axios
+          .all(
+            examIds.map((examId) =>
+              axios.get(
+                `http://localhost:8080/exam-mastery/exams/${examId}/tests`
+              )
+            )
+          )
+          .then((data) => {
+            console.log(
+              data
+                .map((exam) => exam.data)
+                .sort(
+                  (a, b) =>
+                    new Date(a.date).getTime() - new Date(b.date).getTime()
+                )
+                .slice(0, 5)
+            );
+            setTimeline(
+              data
+                .map((exam) => exam.data)
+                .sort(
+                  (a, b) =>
+                    new Date(a.date).getTime() - new Date(b.date).getTime()
+                )
+                .slice(0, 5)
+            );
+          });
+      });
+    }
+  }, [email]);
 
   return (
     <Container maxWidth="xl">
       <Box sx={{ display: "flex", alignItems: "center", mb: 5 }}>
         <Typography variant="h4" sx={{}}>
-          Hi, Welcome Student
+          Hi, Welcome {fullname} !
         </Typography>
       </Box>
 
@@ -162,11 +300,12 @@ const StudentDashboard = () => {
                 "Academic",
                 "Academic",
               ][index],
-              image: [`../../assets/userprofile2.png`,
-               `../../assets/userprofile1.png`,
-               `../../assets/userprofile.png`,
-               `../../assets/userprofile3.png`,
-               `../../assets/userprofile4.png`,
+              image: [
+                `../../assets/userprofile2.png`,
+                `../../assets/userprofile1.png`,
+                `../../assets/userprofile.png`,
+                `../../assets/userprofile3.png`,
+                `../../assets/userprofile4.png`,
               ][index],
               proficiency: 119 - index,
             }))}

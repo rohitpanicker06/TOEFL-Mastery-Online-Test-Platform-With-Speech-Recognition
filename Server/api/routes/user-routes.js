@@ -66,4 +66,7 @@ router
   .route("/students/:email/testHistory")
   .get(StudentHistoryContoller.findStudentByEmail);
 
+//get Username
+router.route("/:email/name").get(userController.getName);
+
 module.exports = router;
