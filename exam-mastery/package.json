@@ -37,13 +37,7 @@
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.0",
     "react-dom": "^18.2.0",
-<<<<<<< HEAD
     "react-icons": "^4.8.0",
-=======
-    "react-full-screen": "^1.1.1",
-    "react-native": "^0.71.6",
-    "react-native-web": "^0.19.4",
->>>>>>> 8beee32788870172c76d5b213b7e5bbcdfe0a591
     "react-pro-sidebar": "^0.7.1",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
