@@ -1,25 +1,33 @@
 import React from "react";
+import BackgroundImage from "../../Assets/bg.jpg";
 
 const Work = () => {
   const workInfoData = [
     {
       
-      title: "Pick Quizes",
-      text: "Lorem ipsum dolor sit amet consectetur. Maecenas orci et sagittis duis elementum interdum facilisi bibendum.",
+      image: "../../assets/file1.png",
+      text: "Use our free IELTS practice tests to study. Improve your listening, reading, writing and speaking. 2022 updated!",
     },
     {
       
-      title: "See Result analysis",
-      text: "Lorem ipsum dolor sit amet consectetur. Maecenas orci et ",
+      image: "../../assets/file2.jpg",
+      text: "Saving your time by doing a short test in our website everyday to track your progress.",
     },
     {
     
-      title: "Watch Tutorials",
-      text: "Lorem ipsum dolor sit amet consectetur. Maecenas orci et lorem ipsum",
+      image: "../../assets/file4.png",
+      text: "Learn from the best and most effective IELTS practice test material for Listening, Reading, Writing, and Speaking without worrying about your pockets.",
     },
   ];
+
+  const bannerImageStyle = {
+    backgroundImage: `url(${BackgroundImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    height: "1000px",
+  };
   return (
-    <div className="work-section-wrapper">
+    <div className="work-section-wrapper" style={bannerImageStyle}>
       <div className="work-section-top">
         <p className="primary-subheading">Work</p>
         <h1 className="primary-heading">How It Works</h1>

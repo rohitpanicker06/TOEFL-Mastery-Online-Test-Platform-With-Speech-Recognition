@@ -23,7 +23,6 @@ import Work from "./Pages/LandingPage/Work";
 import Testimonial from "./Pages/LandingPage/Testimonial";
 import Contact from "./Pages/LandingPage/Contact";
 import Footer from "./Pages/LandingPage/Footer";
-import Navbar from "./Pages/LandingPage/Navbar";
 import Login from "./Pages/Login/Login";
 import Signup from "./Pages/Login/Signup";
 import "./App.css";

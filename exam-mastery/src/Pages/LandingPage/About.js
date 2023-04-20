@@ -1,13 +1,12 @@
 import React from "react";
-
 import AboutBackgroundImage from "../../Assets/about-background-image.png";
 import { BsFillPlayCircleFill } from "react-icons/bs";
 
 const About = () => {
+
   return (
     <div className="about-section-container">
       <div className="about-background-image-container">
-        
       </div>
       <div className="about-section-image-container">
         <img src={AboutBackgroundImage} alt="" />
@@ -22,8 +21,7 @@ const About = () => {
         </p>
         <p className="primary-text">
         Our team is made up of experienced educators and TOEFL experts who are dedicated to helping test-takers achieve their goals. We are here to support you every step of the way and provide you with the tools and resources you need to succeed on the TOEFL.
-
-Thank you for choosing our TOEFL website as your source of information and support. We wish you the best of luck on your TOEFL journey!
+        Thank you for choosing our TOEFL website as your source of information and support. We wish you the best of luck on your TOEFL journey!
         </p>
         <div className="about-buttons-container">
           <button className="secondary-button">Learn More</button>
