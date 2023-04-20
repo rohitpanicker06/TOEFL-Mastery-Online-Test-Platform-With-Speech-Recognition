@@ -76,7 +76,6 @@ const userService = {
         if (!data) {
           res.status(404).send({ message: "Not found Test with Examid " });
         } else {
-          console.log("data", data);
           res.send({ name: data[0].firstName + " " + data[0].lastName });
         }
       })

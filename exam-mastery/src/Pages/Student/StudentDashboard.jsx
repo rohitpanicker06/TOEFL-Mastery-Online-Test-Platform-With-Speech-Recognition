@@ -18,12 +18,35 @@ const StudentDashboard = () => {
     speaking: 0,
   });
   const [timeline, setTimeline] = useState([]);
+  const [email, setEmail] = useState(localStorage.getItem("email"));
+  const [fullname, setFullname] = useState();
+
+  async function getUsername() {
+    const name = await fetch(
+      `http://localhost:8080/exam-mastery/${email}/name`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": "*",
+        },
+      }
+    );
+    return await name.json();
+  }
+
+  useEffect(() => {
+    getUsername().then((data) => {
+      setFullname(data.name);
+    });
+  }, []);
 
   return (
     <Container maxWidth="xl">
       <Box sx={{ display: "flex", alignItems: "center", mb: 5 }}>
         <Typography variant="h4" sx={{}}>
-          Hi, Welcome Student
+          Hi, Welcome {fullname} !
         </Typography>
       </Box>
 
@@ -162,11 +185,12 @@ const StudentDashboard = () => {
                 "Academic",
                 "Academic",
               ][index],
-              image: [`../../assets/userprofile2.png`,
-               `../../assets/userprofile1.png`,
-               `../../assets/userprofile.png`,
-               `../../assets/userprofile3.png`,
-               `../../assets/userprofile4.png`,
+              image: [
+                `../../assets/userprofile2.png`,
+                `../../assets/userprofile1.png`,
+                `../../assets/userprofile.png`,
+                `../../assets/userprofile3.png`,
+                `../../assets/userprofile4.png`,
               ][index],
               proficiency: 119 - index,
             }))}
