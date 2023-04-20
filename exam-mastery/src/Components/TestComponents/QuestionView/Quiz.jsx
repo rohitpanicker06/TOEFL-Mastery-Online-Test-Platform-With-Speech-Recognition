@@ -164,7 +164,7 @@ Your browser does not support the audio element.
     ) {
       axios
         .post(
-          `http://localhost:8080/exam-mastery/students/mandlikrutuja11@gmail.com/testHistory`,
+          `http://localhost:8080/exam-mastery/students/${this.props.user}/testHistory`,
           {
             testType: this.props.test.category,
             testId: this.props.test._id,
@@ -183,7 +183,7 @@ Your browser does not support the audio element.
     ) {
       axios
         .post(
-          `http://localhost:8080/exam-mastery/students/mandlikrutuja11@gmail.com/testHistory`,
+          `http://localhost:8080/exam-mastery/students/${this.props.user}/testHistory`,
           {
             testType: this.props.test.category,
             testId: this.props.test._id,

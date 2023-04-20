@@ -50,6 +50,7 @@ const QuestionView = ({ exams }) => {
   const [initial, setInitial] = useState(true);
   //   const user = useUser().user;
   const [scoreOpen, setScoreOpen] = useState(false);
+  const [user, setUser] = useState(localStorage.getItem("email"));
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -75,11 +76,17 @@ const QuestionView = ({ exams }) => {
     }
   }, [exams]);
 
-  //   useEffect(() => {
-  //     if (user) {
-  //       setEmail(user.email);
-  //     }
-  //   }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     setEmail(user.email);
+  //   }
+  // }, [user]);
+  useEffect(() => {
+    console.log("user email", user);
+    if (user) {
+      setEmail(user.email);
+    }
+  }, []);
 
   //Opens next section
 
@@ -100,7 +107,7 @@ const QuestionView = ({ exams }) => {
   return (
     <section>
       <Timer />
-      <Quiz test={test} getNextTest={getNextTest} />
+      <Quiz test={test} getNextTest={getNextTest} user={user} />
       <Dialog
         fullScreen
         open={open}

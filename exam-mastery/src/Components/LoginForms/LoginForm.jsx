@@ -3,7 +3,7 @@ import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { Form, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
 import { Select, MenuItem, FormControl } from "@mui/material";
-import Session from "../../SessionManagement/Session"
+import Session from "../../SessionManagement/Session";
 
 import {
   Box,
@@ -31,7 +31,6 @@ const animate = {
 };
 
 const LoginForm = ({ setAuth }) => {
-  
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -45,8 +44,6 @@ const LoginForm = ({ setAuth }) => {
     password: Yup.string().required("Password is required"),
   });
 
-  
-
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -59,64 +56,50 @@ const LoginForm = ({ setAuth }) => {
       const bodyData = {
         email: values.email,
         password: values.password,
-        role: selectedValue
+        role: selectedValue,
       };
 
       fetch("http://localhost:8080/exam-mastery/login", {
-
         method: "POST",
 
-           headers: {
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-            "Content-Type": "application/json",
-
-           },
-
-           body: JSON.stringify(bodyData),
-
-            })
-
-            .then((response) => {
+        body: JSON.stringify(bodyData),
+      })
+        .then((response) => {
           if (response.ok) {
-
-           console.log("Login Successfull!");
-           console.log("Navigating to dashboard");
-           Session.handleLogin(bodyData.email);
-
+            console.log("Login Successfull!");
+            console.log("Navigating to dashboard");
+            Session.handleLogin(bodyData.email);
+            localStorage.setItem("email", bodyData.email); //Setting localstorage for Saving email during login
             var checkREsult = selectedValue.localeCompare("Student");
-            if(checkREsult == 0){
-
-              navigate("/student/dashboard?sidebar=true")
-            }else{
-              navigate("/admin/dashboard?adminBar=true")
-            }
-
-           
+            if (checkREsult == 0) {
+              navigate("/student/dashboard?sidebar=true");
             } else {
-
+              navigate("/admin/dashboard?adminBar=true");
+            }
+          } else {
             console.error("Error While logging in:", response.status);
+          }
+        })
 
-           }
-            })
-
-           .catch((error) => {
-
-        console.error("Error adding row:", error);
-
-           });
+        .catch((error) => {
+          console.error("Error adding row:", error);
+        });
       console.log("submitting...");
       console.log(selectedValue);
-
-      
     },
   });
-  
-  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
+
+  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
+    formik;
   const options = [
-      { value: "option1", label: "" },
-      { value: "Student", label: "Student" },
-      { value: "Admin", label: "Admin" },
-    ];
+    { value: "option1", label: "" },
+    { value: "Student", label: "Student" },
+    { value: "Admin", label: "Admin" },
+  ];
   const [selectedValue, setSelectedValue] = useState(options[0].value);
   return (
     <FormikProvider value={formik}>
@@ -139,22 +122,17 @@ const LoginForm = ({ setAuth }) => {
             initial={{ opacity: 0, y: 40 }}
             animate={animate}
           >
-       
             <Select
-            
-            value={selectedValue}
-            
-            onChange={(event) => setSelectedValue(event.target.value)}
-            
+              value={selectedValue}
+              onChange={(event) => setSelectedValue(event.target.value)}
             >
-            {options.map((option) => (
-            <MenuItem  key={option.value} value={option.value}>
-            {option.label}
-            </MenuItem>
+              {options.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
               ))}
             </Select>
-          
-           
+
             <TextField
               fullWidth
               autoComplete="username"
