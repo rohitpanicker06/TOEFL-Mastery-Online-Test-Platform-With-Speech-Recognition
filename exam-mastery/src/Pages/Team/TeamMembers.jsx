@@ -43,36 +43,6 @@ const TeamMembers = () => {
       headerName: "Email",
       flex: 1,
     },
-    {
-      field: "position",
-      headerName: "Position",
-      flex: 1,
-      renderCell: ({ row: { access } }) => {
-        return (
-          <Box
-            width="60%"
-            m="0 auto"
-            p="5px"
-            display="flex"
-            justifyContent="center"
-            backgroundColor={
-              access === "admin"
-                ? colors.greenAccent[600]
-                : access === "user"
-                ? colors.greenAccent[700]
-                : colors.greenAccent[700]
-            }
-            borderRadius="4px"
-          >
-            {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
-            {access === "user" && <LockOpenOutlinedIcon />}
-            <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-              {access}
-            </Typography>
-          </Box>
-        );
-      },
-    },
   ];
 
   return (

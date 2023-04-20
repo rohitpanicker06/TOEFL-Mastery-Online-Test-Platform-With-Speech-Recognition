@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+# TOEFL MASTER - TOEFL MASTER Online Test Platform
+## Project Description
+TOEFL MASTER is an online TOEFL MASTER test platform. The platform provides multiple mock tests to help users improve their listening, reading, writing, and speaking TOEFL MASTER exam performance. TOEFL MASTER can predict the user's overall TOEFL MASTER band score with a score calculator. It consists of an AI-based speaking assessment to help users improve Fluency & Coherence, Lexical Resources, Grammatical range and accuracy, and Pronunciation. It lets users post their scores on social media platforms like Facebook, Twitter, and Whatsapp. TOEFL MASTER have an interactive dashboard for registered users to help track their progress and view past test mock exams.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## User Requirements
+#### Admin Users
+- Admin can log in to the platform using the admin credentials
+- Admin can CRUD questions
+- Admin can CRUD moderators
+- Admin can CRUD user profiles
 
-## Available Scripts
+#### Moderators
+- Moderator can log in to the platform using the moderator credentials
+- Moderator can CRUD questions
+- Moderator can update user profile
 
-In the project directory, you can run:
+#### Registered Users (Students)
+- Users can log in using their credentials to enter the platform 
+- Users can take the TOEFL MASTER test 
+- Registered users can view previous test histories 
+- User can view the scores immediately after completing the test 
+- Users have access to the dashboard to view their progress
+- Users can send scores to different social platforms  
+- Users will be able to view browser notifications for new questions and promotional activities
+- Users can sign up for additional rewards (study material via email)
 
-### `npm start`
+## Team Members
+- Shweta Bulchandani (NUID: 002769540)
+- Rohit Panicker (NUID: 002791446)
+- Mayur Khandetod (NUID: 001585571)
+- Jatinder Bali (NUID: 001539121)
+- Rutuja Mandlik (NUID: 002191355)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Domain Model
+![Final domain diagram]
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![image](https://user-images.githubusercontent.com/113074747/206375077-633c45fb-8d01-4e03-8b3e-946b1ce1721c.png)
 
-### `npm test`
+### Installation
+#### Prerequisites
+- Node.js
+- NPM
+- MongoDB
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Steps
+- Clone the repository
+- Add a collection named `exam_mastery` in MongoDB
+- Run `npm install` in ieltstar and server folder to install all the dependencies
+- Add .env.local file in ieltstar along with the following env variables:- API_URL, AUTH0_SECRET, AUTH0_BASE_URL, AUTH0_ISSUER_BASE_URL, AUTH0_CLIENT_ID, AUTH0_CLIENT_SECRET and set appropriate values
+- Add .env file in server along with the following env variables:- PORT, DB_NAME, DB_URL, SENDGRID_APIKEY, FROM_EMAIL, AccountSID, AuthToken, FROM_SMS, SENDGRID_TEMPLATEID and set appropriate values
+- Run `npm start` in exam-mastery and server folder to start the application, `npm run dev` in exam-mastery folder to start the application in development mode
+- Go to http://localhost:3000 to view the application
 
-### `npm run build`
+### Technology Stack
+- React
+- Node.js
+- Express
+- MongoDB
+- Auth0
+- SendGrid
+- Twilio
+- React Material UI
+- TypeScript
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Folder Structure
+```
+.
+├── exam-mastery - The frontend application
+│   ├── components - All the common components
+│   ├──├── Layout - All the common layouts (admin and student layout)
+│   ├── pages - All the pages
+│   ├── public - All the static files
+│   ├──├── admin - All the admin pages
+│   ├──├── student - All the student pages
+│   ├── styles - All the styles
+│   ├── images - All the images
+│   ├── store - Redux store
+│   ├── images - All the images
+│   ├── material-ui-configs - Material UI theme configurations
+│   ├── utils - All the utility functions
+│   ├── .env.local - Environment variables
+│   ├── .gitignore - Git ignore file
+│   ├── next.config.js - NextJS configuration file
+│   ├── package.json - NPM package file
+│   ├── tsconfig.json - TypeScript configuration file
+│   └── yarn.lock - Yarn lock file
+├── server - The backend application
+│   ├── server.js - Entry point of the application
+│   ├── api - All the APIs
+│   ├──├── controllers - All the controllers
+│   ├──├── routes - All the middlewares
+│   ├──├── services - All the services
+    └──└── models - All the models
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

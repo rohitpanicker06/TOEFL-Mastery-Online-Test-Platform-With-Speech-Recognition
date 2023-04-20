@@ -1,27 +1,29 @@
 class Session {
-    static handleLogin = (username, email, role) => {
-      console.log("received");
-      console.log(username, email, role);
-      localStorage.setItem("loggedIn", true);
-      localStorage.setItem("expirationTime", new Date().getTime() + 4 * 60 * 1000);
+    static handleLogin = (email) => {
+      sessionStorage.setItem("loggedIn", true);
+      sessionStorage.setItem("loggedInUser", email);
+      sessionStorage.setItem("expirationTime", new Date().getTime() + 1 * 60 * 1000);
+      console.log(sessionStorage.getItem("loggedIn"));
+      console.log(sessionStorage.getItem("loggedInUser"));
     };
   
     static handleLogout = () => {
-      localStorage.removeItem("loggedIn");
-      localStorage.removeItem("expirationTime");
+      sessionStorage.removeItem("loggedIn");
+      sessionStorage.removeItem("loggedInUser");
+      sessionStorage.removeItem("expirationTime");
     };
   
     static isLoggedIn = () => {
-      const expirationTime = localStorage.getItem("expirationTime");
+      const expirationTime = sessionStorage.getItem("expirationTime");
       if (expirationTime && new Date().getTime() < expirationTime) {
-        return localStorage.getItem("loggedIn");
+        return sessionStorage.getItem("loggedIn");
       }
       Session.handleLogout(); 
       return null;
     };
   
     static getLoggedInUserEmail = () => {
-      return localStorage.getItem("loggedInUser");
+      return sessionStorage.getItem("loggedInUser");
     };
   }
   
