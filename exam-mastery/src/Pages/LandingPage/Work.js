@@ -15,8 +15,8 @@ const Work = () => {
     },
     {
     
-      image: "../../assets/file4.png",
-      text: "Learn from the best and most effective IELTS practice test material for Listening, Reading, Writing, and Speaking without worrying about your pockets.",
+      image: "../../assets/file3.jpg",
+      text: "Learn from the best and most effective IELTS practice test material for all sections without worrying about your pockets.",
     },
   ];
 
@@ -32,8 +32,7 @@ const Work = () => {
         <p className="primary-subheading">Work</p>
         <h1 className="primary-heading">How It Works</h1>
         <p className="primary-text">
-          Lorem ipsum dolor sit amet consectetur. Non tincidunt magna non et
-          elit. Dolor turpis molestie dui magnis facilisis at fringilla quam.
+        With TOEFL Master, there is no traditional “core curriculum” that you work through like other courses, with each lesson building on the last. Rather, Magoosh gives you everything you need to study for the exam, but in more of a library type format.
         </p>
       </div>
       <div className="work-section-bottom">

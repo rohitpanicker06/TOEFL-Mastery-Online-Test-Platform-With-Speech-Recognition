@@ -2,6 +2,7 @@ import React from "react";
 import AboutBackgroundImage from "../../Assets/about-background-image.png";
 import { BsFillPlayCircleFill } from "react-icons/bs";
 
+
 const About = () => {
 
   return (
@@ -24,10 +25,12 @@ const About = () => {
         Thank you for choosing our TOEFL website as your source of information and support. We wish you the best of luck on your TOEFL journey!
         </p>
         <div className="about-buttons-container">
-          <button className="secondary-button">Learn More</button>
+          <button className="secondary-button">ETS Official Video</button>
           <button className="watch-video-button">
-            <BsFillPlayCircleFill /> Watch Video
-          </button>
+          <a href="https://www.youtube.com/watch?v=5SWuNQD15i4">
+          <BsFillPlayCircleFill/>
+          </a>
+         </button>
         </div>
       </div>
     </div>
