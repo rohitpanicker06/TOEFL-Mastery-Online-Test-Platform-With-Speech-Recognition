@@ -130,16 +130,21 @@ const LoginForm = ({ setAuth }) => {
             initial={{ opacity: 0, y: 40 }}
             animate={animate}
           >
-            <Select
-              value={selectedValue}
-              onChange={(event) => setSelectedValue(event.target.value)}
-            >
-              {options.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </Select>
+             <Select
+  value={selectedValue}
+  onChange={(event) => setSelectedValue(event.target.value)}
+  required
+  displayEmpty
+>
+  <MenuItem value="" disabled>
+    Select an option
+  </MenuItem>
+  {options.map((option) => (
+    <MenuItem key={option.value} value={option.value}>
+      {option.label}
+    </MenuItem>
+  ))}
+</Select>
 
             <TextField
               fullWidth
