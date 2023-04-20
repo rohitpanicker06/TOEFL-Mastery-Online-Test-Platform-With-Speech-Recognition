@@ -123,7 +123,7 @@ const Sidebar = () => {
               Pages
             </Typography>
             <Item
-              title="Manage Exams"
+              title="Manage Students"
               to="/admin/manage-exams"
               icon={<PersonOutlinedIcon/>}
               selected={selected}
